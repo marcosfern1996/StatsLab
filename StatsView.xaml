@@ -1,0 +1,56 @@
+﻿<Window x:Class="StatsLab.StatsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        BorderBrush="Transparent"
+        xmlns:local="clr-namespace:StatsLab"
+        mc:Ignorable="d"
+        Title="StatsView" Height="160" Width="120" AllowsTransparency="True" WindowStyle="None"
+        MouseDown="Window_MouseDown">
+
+    <Grid >
+
+
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width= "30" ></ColumnDefinition>
+                <ColumnDefinition Width= "30"></ColumnDefinition>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="90"></RowDefinition>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+
+            <Button Name = "Close" Grid.Column="2"  Content="X" FontSize="8" Click="Close_Click" HorizontalAlignment="Right" Width="15" Margin="0,5,5,8"/>
+            <Button Name ="Block" Grid.Column="0" Content="0" FontSize="8" Click="Block_Click" Margin="8,7,8,8" />
+            <ProgressBar Name="Micro"  Grid.Column="0" Grid.Row="1" Orientation="Vertical" Margin="5,10,5,10"/>
+            <ProgressBar Grid.Column="1" Grid.Row="1" Orientation="Vertical" Value="3" Margin="5,10,5,10" />
+            <Image Grid.Column="2" Grid.Row="1"></Image >
+            <Image Name="MuteMicro" Grid.Column="0" Grid.Row="2" Source="/mic_off.png"></Image>
+            <Image Name="UnMuteMicro" Grid.Column="0" Grid.Row="2" Source="/mic_on.png"></Image>
+            <Image Name="MuteSourse" Grid.Column="1" Grid.Row="2" Source="/aux_off.png"></Image>
+            <Image Name="UnMuteSourse" Grid.Column="1" Grid.Row="2" Source="/aux_on.png"></Image>
+            <Image Source="/Person.png" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="1" Margin="5" Height="44"/>
+            <Image Name="CandadoA" Source="/Candado_A.png" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="0" Margin="5" Height="44"/>
+            <Image Name="CandadoC" Source="/candado_C.png" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="0" Margin="5" Height="44"/>
+            
+            
+            
+            <Label Content="20" Grid.Row="2" Grid.Column="2" Foreground="Red" FontSize="20" Margin="14,2,14,2"/>
+        </Grid>
+    </Grid>
+
+</Window>
+
+
