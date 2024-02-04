@@ -9,7 +9,7 @@
         BorderBrush="Transparent"
          ResizeMode="NoResize"
          WindowStartupLocation="CenterScreen"
-        MouseDown="Window_MouseDown"
+        MouseDown="DragWindow"
         Title="SettingWindows" Height="600" Width="700" WindowStyle="None" AllowsTransparency="True" >
 
     <Border CornerRadius="30" Background="#FFFFBB00">
@@ -41,8 +41,8 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button Grid.Column="2" Grid.Row="0" Height="25" Width="25" Content="X" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,-2,0,0" Click="Button_Click_1"></Button>
-            <Button Grid.Column="2" Grid.Row="0" Height="25" Width="25" Content="_" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,-2,0,0"  Margin="0,0,30,0" Click="Button_Click_2"></Button>
+            <Button Grid.Column="2" Grid.Row="0" Height="25" Width="25" Content="X" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,-2,0,0" Click="ObsConnect"></Button>
+            <Button Grid.Column="2" Grid.Row="0" Height="25" Width="25" Content="_" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,-2,0,0"  Margin="0,0,30,0" Click="ClosedButton"></Button>
             <TextBlock FontFamily="Impact" Grid.Column="1" Grid.Row="0" FontSize="26" Margin="1,1,1,0" HorizontalAlignment="Center" VerticalAlignment="Center" ><Run Text=" Conecci"/><Run Language="es-ar" Text="ó"/><Run Text="n a OBS"/></TextBlock>
 
             <TextBox FontFamily="Impact" Name="PortTXT" Grid.Column="0" Grid.Row="1" Width="200" Height=" 30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,1,1,1"  Text="9999" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center"  />
@@ -54,11 +54,11 @@
             <TextBox FontFamily="Impact" Name="NameMicrophone" Grid.Column="0" Grid.Row="3" Width="200" Height=" 30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,1,1,1" Text="Micro" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  ></TextBox>
             <TextBlock FontFamily="Impact" Grid.Column="1" Grid.Row="3"  Width="200" Height=" 30" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,1,1,1" Text="Microfono" TextAlignment="Center"/>
 
-            <TextBox FontFamily="Impact" Name="NameSourse" Grid.Column="0" Grid.Row="4" Width="200" Height=" 30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,1,1,1" Text="Musica" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  ></TextBox>
+            <TextBox FontFamily="Impact" Name="NameSource" Grid.Column="0" Grid.Row="4" Width="200" Height=" 30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,1,1,1" Text="Musica" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="NameSourse_TextChanged"  ></TextBox>
             <TextBlock FontFamily="Impact" Grid.Column="1" Grid.Row="4"  Width="200" Height=" 30" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,0,1,1" Text="Audio" TextAlignment="Center"/>
 
 
-            <Button Name="Conectar" FontFamily="Impact" Grid.Column="1" Grid.Row="5" Margin="1,1,1,1" Content="Conectar OBS" FontSize="24" Click="Button_Click" Height="39" Width="200">
+            <Button Name="Conectar" FontFamily="Impact" Grid.Column="1" Grid.Row="5" Margin="1,1,1,1" Content="Conectar OBS" FontSize="24" Click="ObsConnect" Height="39" Width="200">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">
@@ -77,7 +77,7 @@
 
             <TextBox FontFamily="Impact" Name="ChanelName" Grid.Column="0" Grid.Row="7" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Text="marcosfedez96" FontSize="20" TextAlignment="Center" />
             <TextBlock  FontFamily="Impact" Grid.Row="7" Grid.Column="1"  Text="ID Twitch" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,15,0,0"></TextBlock>
-            <Button FontFamily="Impact" Name="Datos" Grid.Column="1" Grid.Row="8" Margin="1,1,1,1" Content="Conectar Twitch" FontSize="20" Click="Datos_Click" Height="39" Width="200">
+            <Button FontFamily="Impact" Name="Datos" Grid.Column="1" Grid.Row="8" Margin="1,1,1,1" Content="Conectar Twitch" FontSize="20" Click="TwitchConnect" Height="39" Width="200">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">
@@ -92,7 +92,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button FontFamily="Impact" Name="Monitoreo" Grid.Column="2" Grid.Row="5" Margin="2,1,2,1" Content="Monitor OBS" FontSize="24" Click="Monitoreo_Click" Height="39" Width="200">
+            <Button FontFamily="Impact" Name="Monitoreo" Grid.Column="2" Grid.Row="5" Margin="2,1,2,1" Content="Monitor OBS" FontSize="24" Click="Monitoring" Height="39" Width="200">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">
@@ -107,9 +107,9 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <TextBlock Grid.Column="2" Grid.Row="9" FontSize="12" TextAlignment="Right" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="0,41,0,0" VerticalAlignment="Top">
-                <Hyperlink  NavigateUri="https://cafecito.app/MarcosFedez" RequestNavigate="Hyperlink_RequestNavigate">
-                    Ayuda al proyecto con lo que quieras.
+            <TextBlock Grid.Column="2" Grid.Row="9" FontSize="12" TextAlignment="Right"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Hyperlink  NavigateUri="https://cafecito.app/MarcosFedez" RequestNavigate="Donations">
+                    Ayuda al proyecto.
             </Hyperlink>
             </TextBlock>
         </Grid>

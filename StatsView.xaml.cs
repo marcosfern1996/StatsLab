@@ -19,34 +19,29 @@ namespace StatsLab
         private DispatcherTimer timer;
         TwitchConnection twitchConnection;
         Helix helix;
-       // OBSWebsocket obs;
         public bool blockTouch = false;
 
         public StatsView()
         {
             InitializeComponent();
             twitchConnection = new TwitchConnection();
-            //obs = new OBSWebsocket();
             helix = new Helix();
 
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(0.1f);
             timer.Tick += rechargedTimer;
-            timer.Start();
-            
+            timer.Start();            
         }
-
 
         private void rechargedTimer(object sender, EventArgs e)
         {
             if (DataSaved.Instance.isConnectedOBS)
             {
-                ActualizarMuteMicro();
-                ActualizarMuteAudio();
-                ActualizationLock();
-                // Console.WriteLine(DataSaved.Instance.isConnectedOBS);
+                UpdateStateMicro();
+                UpdateStateSource();
+                UpdateStateLock();
             }
-            else {// Console.WriteLine(DataSaved.Instance.isConnectedOBS);
+            else {
             }
             ExceptionOBSClose();
         }
@@ -61,26 +56,26 @@ namespace StatsLab
             }
 
         }
+
         public void UpdateProgressBarMicro()
-        {
+        {   
+            //I need Continuae this part.
+            //that class need get the dB of the Sourse and show it in a progressBar.
             JObject data = new JObject
-    {
-        { "inputName", DataSaved.Instance.sourseName},
-        { "inputVolumeDb", DataSaved.Instance.soursedB }
-        // Agrega otros campos según sea necesario
-    };
+            {
+                { "inputName", DataSaved.Instance.sourceName},
+                { "inputVolumeDb", DataSaved.Instance.sourcedB }
+
+            };
             string jsonString = data.ToString();
-
-            //OBSConnector.Instance.obs.SendRequest(requestType: "GetInputAudioSyncOffset", data);
-
+            
+            
         }
 
-
-
-        public void ActualizarMuteMicro()
+        public void UpdateStateMicro()
         {
             DataMicro();
-            if (OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.microName))
+            if (OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.microName[1]))
             {
                 UnMuteMicro.Visibility = Visibility.Collapsed;
                 MuteMicro.Visibility = Visibility.Visible;
@@ -92,38 +87,44 @@ namespace StatsLab
             }
         }
 
-        public void ActualizarMuteAudio()
+        public void UpdateStateSource()
         {
             DataAudio();
-            if (OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.sourseName))
+            if (OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.sourceName))
             {
-                MuteSourse.Visibility = Visibility.Visible;
-                UnMuteSourse.Visibility = Visibility.Collapsed;
+                MuteSource.Visibility = Visibility.Visible;
+                UnMuteSource.Visibility = Visibility.Collapsed;
             }
             else
             {
-                MuteSourse.Visibility = Visibility.Collapsed;
-                UnMuteSourse.Visibility = Visibility.Visible;
+                MuteSource.Visibility = Visibility.Collapsed;
+                UnMuteSource.Visibility = Visibility.Visible;
             }
         }
+
         public void DataMicro()
         {
-               DataSaved.Instance.microOn = OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.microName);
-                                  
+            // I want to have access to all audio sourse an make a list, which the user will can choose her source audio
+            for(int i = 0;DataSaved.Instance.microName.Length > 0;i++)
+            {
+                DataSaved.Instance.microOn = OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.microName[1]);
+
+            }
+
         }
 
         public void DataAudio()
         {            
-                DataSaved.Instance.sourseOn = OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.sourseName);
+                DataSaved.Instance.sourceOn = OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.sourceName);
         }
 
-        private void Close_Click(object sender, RoutedEventArgs e)
+        private void ClosedButton(object sender, RoutedEventArgs e)
         {
             if (!blockTouch)
             Application.Current.Shutdown();
         }
 
-        private void Block_Click(object sender, RoutedEventArgs e)
+        private void BlockButton(object sender, RoutedEventArgs e)
         {
             if (blockTouch)
             { blockTouch=false;}
@@ -132,7 +133,7 @@ namespace StatsLab
             
         }
        
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        private void DragWindow(object sender, MouseButtonEventArgs e)
         {
             if(e.LeftButton == MouseButtonState.Pressed && !blockTouch)
             {
@@ -140,7 +141,7 @@ namespace StatsLab
             }
         }
 
-        public void ActualizationLock()
+        public void UpdateStateLock()
         {
             if (blockTouch == false)
             {
@@ -192,8 +193,7 @@ namespace StatsLab
             }
         }
 
-
-
+        
     }
 }
 

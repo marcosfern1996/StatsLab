@@ -4,37 +4,33 @@ using System;
 namespace StatsLab
 {
     public class Bandera
-    {
-       
-        StatsView statsView = new StatsView() ;
-      
+    {       
+        StatsView statsView = new StatsView() ;      
 
         public void ActualizarMicro()
         {
-                statsView.ActualizarMuteMicro();
-           
+            statsView.UpdateStateMicro();           
         }
-        public void ActualizarSourse()
+
+        public void ActualizarSource()
         {
-            statsView.ActualizarMuteAudio();
-            
-           
+            statsView.UpdateStateSource();          
         }
+
         public void ActualizarBarraMicro()
         {
             statsView.UpdateProgressBarMicro();
-
         }
+
         public void AbrirMonitoreo()
         {
-                statsView.Show();
-           
+            statsView.Show();           
         }
+
         public void ConectingTwitch()
         {
             statsView.GetStateTWitch();
-        }
-       
+        }     
 
     }
 

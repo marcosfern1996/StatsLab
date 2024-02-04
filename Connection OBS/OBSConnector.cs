@@ -8,8 +8,11 @@ namespace StatsLab.Connection_OBS
 {
     public class OBSConnector
     {
+        public bool micro;
+        public bool musica;
+        public OBSWebsocket obs;
+        public event EventHandler Connected;
         private static OBSConnector _instance;
-
         
         private OBSConnector()
         {
@@ -28,15 +31,7 @@ namespace StatsLab.Connection_OBS
                 }
                 return _instance;
             }
-        }
-
-
-        public bool micro;
-        public bool musica;
-
-        public OBSWebsocket obs;
-        public event EventHandler Connected;
-       
+        }       
 
         public void Connect(string port, string password)
         {
@@ -62,7 +57,6 @@ namespace StatsLab.Connection_OBS
             Connected?.Invoke(this, EventArgs.Empty);
             DataSaved.Instance.isConnectedOBS = true;
         }
-
         
     }
 }

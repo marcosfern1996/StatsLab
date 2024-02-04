@@ -3,6 +3,7 @@ using StatsLab.Connection_Twitch;
 using System;
 using System.Windows;
 using System.Windows.Input;
+using Newtonsoft.Json;
 
 namespace StatsLab
 {
@@ -10,25 +11,17 @@ namespace StatsLab
     public partial class SettingWindows : Window
     {
         TwitchConnection _twitchConnection;
-        Bandera bandera;
-        
-
-       // public bool monitoreando;
+        Bandera bandera;        
         public string portTxt, passwordTxt, micro, souseAudio1;
-        
-        //public bool sussesConectedBool;
-        
+
         public SettingWindows()
         {
-           
            bandera = new Bandera();
             _twitchConnection = new TwitchConnection();
-            
             InitializeComponent();
         }
-
         
-        private void Datos_Click(object sender, RoutedEventArgs e)
+        private void TwitchConnect(object sender, RoutedEventArgs e)
         {
 
             bandera.ActualizarBarraMicro();
@@ -40,22 +33,22 @@ namespace StatsLab
             */
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ClosedButton(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void MinimizedButton(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ObsConnect(object sender, RoutedEventArgs e)
         {
             DataSaved.Instance.PortOBS = PortTXT.Text;
             DataSaved.Instance.PasswordOBS = PasswordTXT.Password;
-            DataSaved.Instance.sourseName = NameSourse.Text;
-            DataSaved.Instance.microName = NameMicrophone.Text;
+            DataSaved.Instance.sourceName = NameSource.Text;
+            DataSaved.Instance.microName[1] = NameMicrophone.Text;
 
 
             Conectar.Content = "Conectar OBS"; 
@@ -73,13 +66,13 @@ namespace StatsLab
                        
         }
 
-        private void Monitoreo_Click(object sender, RoutedEventArgs e)
+        private void Monitoring(object sender, RoutedEventArgs e)
         {
             DataSaved.Instance.isOpenedOBS();
             if (DataSaved.Instance.isOpenObs && DataSaved.Instance.isConnectedOBS)
             {
                 bandera.ActualizarMicro();
-                bandera.ActualizarSourse();
+                bandera.ActualizarSource();
                 bandera.AbrirMonitoreo();
 
                 //monitoreando = true;
@@ -95,18 +88,19 @@ namespace StatsLab
 
 
         }
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+
+        private void DragWindow(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed )
             {
                 this.DragMove();
             }
         }
-        private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+
+        private void Donations(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
-            // Abre el enlace en el navegador predeterminado
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(e.Uri.AbsoluteUri));
-            e.Handled = true;  // Para evitar que el navegador predeterminado se abra también
+            e.Handled = true; 
         }
     }
 }

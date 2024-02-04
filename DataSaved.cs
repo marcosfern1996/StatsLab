@@ -17,21 +17,15 @@ namespace StatsLab
         public string PasswordOBS { get; set; }
         public bool isConnectedOBS {  get; set; }
         public bool microOn {  get; set; }
-        public bool sourseOn{  get; set; }
-        public string microName {  get; set; }
-        public string sourseName {  get; set; }
+        public bool sourceOn{  get; set; }
+        public string[] microName {  get; set; }
+        public string sourceName {  get; set; }
         public double microdB {  get; set; }
-        public double soursedB{  get; set; }
-        public double sourseMul{  get; set; }
-
-
-
+        public double sourcedB{  get; set; }
+        public double sourceMul{  get; set; }
         public string idTwitch {  get; set; }
         public string channelName {  get; set; }
 
-        private DataSaved()
-        {
-        }
         public static DataSaved Instance
         {
             get

@@ -13,7 +13,7 @@
         xmlns:local="clr-namespace:StatsLab"
         mc:Ignorable="d"
         Title="StatsView" Height="160" Width="120" AllowsTransparency="True" WindowStyle="None"
-        MouseDown="Window_MouseDown">
+        MouseDown="DragWindow">
 
     <Grid >
 
@@ -32,15 +32,15 @@
             </Grid.RowDefinitions>
 
 
-            <Button Name = "Close" Grid.Column="2"  Content="X" FontSize="8" Click="Close_Click" HorizontalAlignment="Right" Width="15" Margin="0,5,5,8"/>
-            <Button Name ="Block" Grid.Column="0" Content="0" FontSize="8" Click="Block_Click" Margin="8,7,8,8" />
+            <Button Name = "Close" Grid.Column="2"  Content="X" FontSize="8" Click="ClosedButton" HorizontalAlignment="Right" Width="15" Margin="0,5,5,8"/>
+            <Button Name ="Block" Grid.Column="0" Content="0" FontSize="8" Click="BlockButton" Margin="8,7,8,8" />
             <ProgressBar Name="Micro"  Grid.Column="0" Grid.Row="1" Orientation="Vertical" Margin="5,10,5,10"/>
             <ProgressBar Grid.Column="1" Grid.Row="1" Orientation="Vertical" Value="3" Margin="5,10,5,10" />
             <Image Grid.Column="2" Grid.Row="1"></Image >
             <Image Name="MuteMicro" Grid.Column="0" Grid.Row="2" Source="/mic_off.png"></Image>
             <Image Name="UnMuteMicro" Grid.Column="0" Grid.Row="2" Source="/mic_on.png"></Image>
-            <Image Name="MuteSourse" Grid.Column="1" Grid.Row="2" Source="/aux_off.png"></Image>
-            <Image Name="UnMuteSourse" Grid.Column="1" Grid.Row="2" Source="/aux_on.png"></Image>
+            <Image Name="MuteSource" Grid.Column="1" Grid.Row="2" Source="/aux_off.png"></Image>
+            <Image Name="UnMuteSource" Grid.Column="1" Grid.Row="2" Source="/aux_on.png"></Image>
             <Image Source="/Person.png" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="1" Margin="5" Height="44"/>
             <Image Name="CandadoA" Source="/Candado_A.png" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="0" Margin="5" Height="44"/>
             <Image Name="CandadoC" Source="/candado_C.png" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="0" Margin="5" Height="44"/>
