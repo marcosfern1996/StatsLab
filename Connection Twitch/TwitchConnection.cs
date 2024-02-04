@@ -70,7 +70,7 @@ $(document).ready(function() {
         {
             state = TwitchConnectionUtils.GenerateStateToken();
 
-            string clientId = "30y1o0f4aisqenvpgnm3duwa8q77cl";
+            string clientId = "";
             SettingWindows settingWindows;
             settingWindows = new SettingWindows();
            // settingWindows.DataTwitch(clientId);
