@@ -9,6 +9,8 @@ using System.Windows.Threading;
 using TwitchLib.Api.Helix;
 using System.Diagnostics;
 using System.Threading;
+using OBSWebsocketDotNet.Types.Events;
+using OBSWebsocketDotNet;
 
 
 namespace StatsLab
@@ -16,25 +18,27 @@ namespace StatsLab
 
     public partial class StatsView : Window
     {
+        OBSWebsocket ws;
         private DispatcherTimer timer;
-        TwitchConnection twitchConnection;
         Helix helix;
         public bool blockTouch = false;
 
         public StatsView()
         {
             InitializeComponent();
-            twitchConnection = new TwitchConnection();
             helix = new Helix();
+            ws =new OBSWebsocket();
+            //KeyDown += TuVentana_KeyDown;
 
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(0.1f);
             timer.Tick += rechargedTimer;
-            timer.Start();            
+            timer.Start();
         }
 
         private void rechargedTimer(object sender, EventArgs e)
         {
+            ViewStates();
             if (DataSaved.Instance.isConnectedOBS)
             {
                 UpdateStateMicro();
@@ -45,97 +49,110 @@ namespace StatsLab
             }
             ExceptionOBSClose();
         }
+        private void TuVentana_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F11 && Block.Visibility == Visibility.Visible)
+            {
+                Block.Visibility = Visibility.Collapsed;
+                Close.Visibility = Visibility.Collapsed;
+                CandadoA.Visibility = Visibility.Collapsed;
+                CandadoA.Visibility = Visibility.Collapsed;
+            }
+            else if (e.Key == Key.F11 && Block.Visibility == Visibility.Collapsed)
+            {
+                Block.Visibility = Visibility.Visible;
+                Close.Visibility = Visibility.Visible;
+                UpdateStateLock();
 
+            }
+
+        }
         public void ExceptionOBSClose()
         {
             DataSaved.Instance.isOpenedOBS();
-            if (!DataSaved.Instance.isOpenObs)
+            if (!DataSaved.Instance.isOpenObs && DataSaved.Instance.isConnectedOBS)
             {
-                this.Close();
+                this.Hide();
 
             }
 
         }
 
         public void UpdateProgressBarMicro()
-        {   
-            //I need Continuae this part.
-            //that class need get the dB of the Sourse and show it in a progressBar.
-            JObject data = new JObject
-            {
-                { "inputName", DataSaved.Instance.sourceName},
-                { "inputVolumeDb", DataSaved.Instance.sourcedB }
+        {
 
-            };
-            string jsonString = data.ToString();
-            
-            
+
         }
 
         public void UpdateStateMicro()
         {
-            DataMicro();
-            if (OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.microName[1]))
+            
+            if (DataSaved.Instance.microName != null )
             {
-                UnMuteMicro.Visibility = Visibility.Collapsed;
-                MuteMicro.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                UnMuteMicro.Visibility = Visibility.Visible;
-                MuteMicro.Visibility = Visibility.Collapsed;
+                DataMicro();
+                if (OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.microName) || OBSConnector.Instance.obs.GetInputVolume(DataSaved.Instance.microName).VolumeMul <= 0)
+                {
+                    UnMuteMicro.Visibility = Visibility.Collapsed;
+                    MuteMicro.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    UnMuteMicro.Visibility = Visibility.Visible;
+                    MuteMicro.Visibility = Visibility.Collapsed;
+                }
             }
         }
 
         public void UpdateStateSource()
         {
-            DataAudio();
-            if (OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.sourceName))
+            if (DataSaved.Instance.sourceName != null)
             {
-                MuteSource.Visibility = Visibility.Visible;
-                UnMuteSource.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                MuteSource.Visibility = Visibility.Collapsed;
-                UnMuteSource.Visibility = Visibility.Visible;
+                DataAudio();
+                if (OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.sourceName) || OBSConnector.Instance.obs.GetInputVolume(DataSaved.Instance.sourceName).VolumeMul <= 0)
+                {
+                    MuteSource.Visibility = Visibility.Visible;
+                    UnMuteSource.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    MuteSource.Visibility = Visibility.Collapsed;
+                    UnMuteSource.Visibility = Visibility.Visible;
+                }
             }
         }
 
         public void DataMicro()
         {
-            // I want to have access to all audio sourse an make a list, which the user will can choose her source audio
-            for(int i = 0;DataSaved.Instance.microName.Length > 0;i++)
+            if (DataSaved.Instance.microName != null)
             {
-                DataSaved.Instance.microOn = OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.microName[1]);
-
+                DataSaved.Instance.microOn = OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.microName);
             }
 
         }
 
         public void DataAudio()
-        {            
-                DataSaved.Instance.sourceOn = OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.sourceName);
+        {
+            DataSaved.Instance.sourceOn = OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.sourceName);
         }
 
         private void ClosedButton(object sender, RoutedEventArgs e)
         {
             if (!blockTouch)
-            Application.Current.Shutdown();
+                this.Hide();
         }
 
         private void BlockButton(object sender, RoutedEventArgs e)
         {
             if (blockTouch)
-            { blockTouch=false;}
+            { blockTouch = false; }
             else
-            { blockTouch = true;}
-            
+            { blockTouch = true; }
+
         }
-       
+
         private void DragWindow(object sender, MouseButtonEventArgs e)
         {
-            if(e.LeftButton == MouseButtonState.Pressed && !blockTouch)
+            if (e.LeftButton == MouseButtonState.Pressed && !blockTouch)
             {
                 this.DragMove();
             }
@@ -155,47 +172,62 @@ namespace StatsLab
             }
         }
 
-        public async void GetStateTWitch()
+       
+        
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("mi ID"+ DataSaved.Instance.idTwitch);
-            Console.WriteLine("MI Channel"+ DataSaved.Instance.channelName);
-
-
-            string clientId = DataSaved.Instance.idTwitch; // Reemplaza con tu ID de cliente de Twitch
-            string accessToken = "u6yyjddzcj72s7dfyrmuar8n6cvjwq"; // Reemplaza con tu token de acceso
-
-            string apiUrl = $"https://api.twitch.tv/helix/channels?broadcaster_id={DataSaved.Instance.idTwitch}";
-
-            using (HttpClient client = new HttpClient())
+            
+            Console.WriteLine(OBSConnector.Instance.obs.GetMediaInputStatus("Musica"));
+        }
+        private void Obs_InputVolumeMeters(object sender, InputVolumeMetersEventArgs e)
+        {
+            /*JObject sourses = new JObject()
             {
-                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
-                client.DefaultRequestHeaders.Add("Client-Id", clientId);
+                { "PropertyName", " "}, 
+            }*/
 
-                try
-                {
-                    HttpResponseMessage response = await client.GetAsync(apiUrl);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string jsonResponse = await response.Content.ReadAsStringAsync();
-                        // Aquí puedes procesar la respuesta JSON para obtener la información que necesitas
-                        Console.WriteLine(jsonResponse);
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Error en la solicitud: {response.StatusCode} - {response.ReasonPhrase}");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error en la solicitud: {ex.Message}");
-                }
+            // Aquí puedes trabajar con los datos de volumen recibidos en e.inputs
+           /* foreach (var input in e.inputs)
+            {
+                var nombreInput = input["Musica"].;
+                Console.WriteLine(nombreInput);
+                
+                // Accede a las propiedades de cada input, por ejemplo:
+                // var nombreInput = input["nombrePropiedad"].ToString();
             }
+           */
+            Console.WriteLine("Funcionó");
         }
 
-        
+        public void ViewStates()
+        {
+            if (DataSaved.Instance.microName == null)
+            {
+                Micro.Visibility = Visibility.Collapsed;
+                MuteMicro.Visibility = Visibility.Collapsed;
+                UnMuteMicro.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                Micro.Visibility = Visibility.Visible;
+                MuteMicro.Visibility = Visibility.Visible;
+                UnMuteMicro.Visibility = Visibility.Visible;
+            }
+            if (DataSaved.Instance.sourceName == null)
+            {
+                Source.Visibility = Visibility.Collapsed;
+                MuteSource.Visibility = Visibility.Collapsed;
+                UnMuteSource.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                Source.Visibility = Visibility.Visible;
+                MuteSource.Visibility = Visibility.Visible;
+                UnMuteSource.Visibility = Visibility.Visible;
+            }
+        }
     }
-}
+    } 
 
 
 

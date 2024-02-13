@@ -1,7 +1,7 @@
 ﻿using OBSWebsocketDotNet;
+using OBSWebsocketDotNet.Types.Events;
+
 using System;
-using System.ComponentModel.Composition.Primitives;
-using System.Net.Http.Headers;
 using System.Windows.Forms;
 
 namespace StatsLab.Connection_OBS
@@ -33,6 +33,8 @@ namespace StatsLab.Connection_OBS
             }
         }       
 
+        
+
         public void Connect(string port, string password)
         {
             obs.ConnectAsync("ws://localhost:" + port, password);
@@ -56,7 +58,9 @@ namespace StatsLab.Connection_OBS
             
             Connected?.Invoke(this, EventArgs.Empty);
             DataSaved.Instance.isConnectedOBS = true;
+
+           
         }
-        
+       
     }
 }

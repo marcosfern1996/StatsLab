@@ -5,174 +5,87 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-
+using TwitchLib.Api;
+using TwitchLib.Api.Helix;
 
 namespace StatsLab.Connection_Twitch
 {
    
 
-    public static class TwitchConnectionUtils
+    public  class TwitchConnection
     {
+        Helix hel = new Helix();
+
+        // Configura tu clientId y clientSecret obtenidos al registrar tu aplicación en el panel de desarrolladores de Twitch
         
+        private readonly TwitchAPI api;
 
-        public static readonly string AUTH_PAGE = @"<!DOCTYPE html>
-<html>
-<head>
-<script src=""https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js""></script>
-<script type=""text/javascript"" language=""javascript"">
-function isEmpty(str) {
-  return (!str || str.length === 0);
-}
-$(document).ready(function() {
-	if(!isEmpty(location.hash.substr(1))) {
-		var xreq = new XMLHttpRequest();
-		xreq.open('GET', '/auth?' + location.hash.substr(1), true);
-		xreq.send();
-	}
-});
+        // Crea una instancia del cliente de la API de Twitch
 
-</script>
-<body>Success! You can close this tab and return to the app.</body></html>";
 
-        public static string GenerateStateToken()
-        {
-            return Guid.NewGuid().ToString();
-        }
-
-        public static BitmapImage LoadImageFromUrl(string url)
-        {
-            var bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.UriSource = new Uri(url, UriKind.Absolute);
-            bitmap.EndInit();
-
-            return bitmap;
-        }
-    }
-    public class TwitchConnection
-    {
         
-
-        HttpListener listener;
-        static volatile bool isListening = false;
-        static volatile string state = string.Empty;
-        readonly string prefix = "http://localhost:3000/";
-
-        public static event EventHandler<string> AccessTokenResponse;
-
-        public async void ConnectTwitchAccount()
+        public async void ConnectTwitch()
         {
-            await LaunchAuthorizationWebPage();
-            await Task.Yield();
-        }
+            string clientId = "30y1o0f4aisqenvpgnm3duwa8q77cl";
+            string clientSecret = "cttt17udurkflc3a338yvhl6dklq5z";
+            // Realiza la autenticación
 
-        private async Task LaunchAuthorizationWebPage()
-        {
-            state = TwitchConnectionUtils.GenerateStateToken();
+            // Cambia el array de strings a una lista
+            var userLogins = new System.Collections.Generic.List<string> { DataSaved.Instance.channelName };
 
-            string clientId = "";
-            SettingWindows settingWindows;
-            settingWindows = new SettingWindows();
-           // settingWindows.DataTwitch(clientId);
-            string redirectUri = prefix + "auth?";
-            string scopes = WebUtility.UrlEncode("user_read user:read:broadcast bits:read chat:read channel:read:redemptions");
-            string url = $"https://id.twitch.tv/oauth2/authorize?response_type=token&client_id={clientId}&redirect_uri={redirectUri}&force_verify=true&state={state}&scope={scopes}";
+            var api = new TwitchAPI();
+            api.Settings.ClientId = clientId;
+            api.Settings.Secret = clientSecret;
 
-            var processStartInfo = new ProcessStartInfo(url)
+            var streams = await api.Helix.Streams.GetStreamsAsync(userLogins :userLogins);
+
+            if (streams.Streams.Length > 0)
             {
-                Verb = "open",
-                UseShellExecute = true
-            };
-            Process.Start(processStartInfo);
-
-            string accessToken = await StartWebListener();
-
-            if (!string.IsNullOrEmpty(accessToken))
-            {
-                EventHandler<string> handler = AccessTokenResponse;
-                handler?.Invoke(this, accessToken);
+                Console.WriteLine($"Espectadores actuales: {streams.Streams[0].ViewerCount}");
+                DataSaved.Instance.countViewers = streams.Streams[0].ViewerCount.ToString();
             }
-        }
-
-        private async Task<string> StartWebListener()
-        {
-            if ((listener != null) && isListening)
-                listener.Stop();
-
-            isListening = false;
-            listener = new HttpListener();
-            listener.Prefixes.Add(this.prefix);
-            listener.Start();
-            string accessToken = await Listen();
-            listener.Close();
-            return accessToken;
-        }
-
-        private async Task<string> Listen()
-        {
-            isListening = true;
-            string accessToken = string.Empty;
-            while (isListening)
+            else
             {
-                HttpListenerContext listenerContext = null;
-                try
+                Console.WriteLine("Canal no encontrado o sin transmisión en vivo");
+            }
+
+        }
+
+        public async void ConsultViewers()
+        {
+            string clientId = "30y1o0f4aisqenvpgnm3duwa8q77cl";
+            string clientSecret = "cttt17udurkflc3a338yvhl6dklq5z";
+            var api = new TwitchAPI();
+            api.Settings.ClientId = clientId;
+            api.Settings.Secret = clientSecret;
+
+            var userLogins = new System.Collections.Generic.List<string> { DataSaved.Instance.channelName };
+
+            try
+            {
+                var streams = await api.Helix.Streams.GetStreamsAsync(userLogins: userLogins);
+
+                if (streams.Streams.Length > 0)
                 {
-                    listenerContext = await listener.GetContextAsync();
+                    DataSaved.Instance.countViewers = streams.Streams[0].ViewerCount.ToString();
+                    Console.WriteLine(streams.Streams[0].ViewerCount.ToString());
                 }
-                catch (Exception ex)
+                else
                 {
-                    Debug.WriteLine(ex.Message);
+                    Console.WriteLine("Canal no encontrado o sin transmisión en vivo");
                 }
 
-                if (listenerContext != null)
+            }
+            catch (Exception ex)
                 {
-                    HttpListenerRequest request = listenerContext.Request;
-                    HttpListenerResponse response = listenerContext.Response;
-
-                    bool doSendAuthPage = false;
-
-                    if (request.HttpMethod == "GET" && request.Url.AbsolutePath.Contains("/auth"))
-                    {
-                        doSendAuthPage = true;
-                        if (!string.IsNullOrEmpty(request.RawUrl))
-                        {
-                            string fragment = request.RawUrl.Replace("/auth?", "");
-                            string[] tokens = fragment.Split('&');
-
-                            string tmpaccessToken = tokens.SingleOrDefault(t => t.StartsWith("access_token="));
-                            string stateToken = tokens.SingleOrDefault(t => t.StartsWith("state="));
-
-                            if ((!string.IsNullOrEmpty(tmpaccessToken)) && (!string.IsNullOrEmpty(stateToken)))
-                            {
-                                stateToken = stateToken.Replace("state=", "").Trim();
-                                if ((!string.IsNullOrEmpty(stateToken)) && (state.Equals(stateToken, StringComparison.InvariantCultureIgnoreCase)))
-                                {
-                                    accessToken = tmpaccessToken.Replace("access_token=", "").Trim();
-                                    isListening = false;
-                                    doSendAuthPage = false;
-                                }
-                            }
-                        }
-                    }
-
-                    if (doSendAuthPage)
-                    {
-                        byte[] bytes = Encoding.UTF8.GetBytes(TwitchConnectionUtils.AUTH_PAGE);
-                        response.ContentType = "text/html";
-                        response.ContentEncoding = Encoding.UTF8;
-                        response.ContentLength64 = bytes.LongLength;
-                        await response.OutputStream.WriteAsync(bytes, 0, bytes.Length);
-                        response.Close();
-                    }
-                    else
-                    {
-                        response.StatusCode = 200;
-                        response.Close();
-                    }
+                    Console.WriteLine($"Error al consultar el número de espectadores: {ex.Message}");
                 }
             }
 
-            return accessToken;
-        }
+        
+
     }
+
+
+    
 }

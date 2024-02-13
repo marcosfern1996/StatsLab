@@ -5,7 +5,8 @@ namespace StatsLab
 {
     public class Bandera
     {       
-        StatsView statsView = new StatsView() ;      
+        StatsView statsView = new StatsView() ;  
+        StatsViewTw statsViewTw = new StatsViewTw() ;
 
         public void ActualizarMicro()
         {
@@ -19,19 +20,18 @@ namespace StatsLab
 
         public void ActualizarBarraMicro()
         {
-            statsView.UpdateProgressBarMicro();
+           // statsView.UpdateProgressBarMicro();
         }
 
-        public void AbrirMonitoreo()
+        public void AbrirMonitoreoObs()
         {
             statsView.Show();           
         }
-
-        public void ConectingTwitch()
+        public void AbrirMonitoreoTwitch()
         {
-            statsView.GetStateTWitch();
-        }     
-
+            statsViewTw.Show();
+        }
+       
     }
 
    

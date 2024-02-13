@@ -10,16 +10,22 @@
          ResizeMode="NoResize"
          WindowStartupLocation="CenterScreen"
         MouseDown="DragWindow"
-        Title="SettingWindows" Height="600" Width="700" WindowStyle="None" AllowsTransparency="True" >
+        Icon="D:\C# Proyects\StatsLab\StatsLab\Images\HUB-64.ico"
+        Title="SettingWindows" 
+        Height="600" 
+        Width="700" 
+        WindowStyle="None" 
+        AllowsTransparency="True" >
 
-    <Border CornerRadius="30" Background="#FFFFBB00">
+    <Border CornerRadius="30" Background="#1A1B41">
 
-        <Grid Margin="15">
+        <Grid Margin="10">
+
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <LinearGradientBrush.GradientStops>
-                        <GradientStop Color="#FFEFBC2D" Offset="0"/>
-                        <GradientStop Color="#FFFFBB00" Offset="1"/>
+                        <GradientStop Color="#F1FFE7" Offset="0"/>
+                        <GradientStop Color="#C2E7DA" Offset="1"/>
                     </LinearGradientBrush.GradientStops>
                 </LinearGradientBrush>
             </Grid.Background>
@@ -40,25 +46,198 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
+            <Border Grid.ColumnSpan="3" 
+                Grid.RowSpan="10" 
+                BorderThickness="12" 
+                 CornerRadius="15"
+                BorderBrush="#1A1B41"
+                Margin="-6"
+                ></Border>
+            
+            <Button Grid.Column="2" 
+                    Grid.Row="0" 
+                    Width="25" 
+                    Content="X" 
+                    FontSize="20" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Top" 
+                    HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" 
+                    Padding="0,-2,0,0" 
+                    Click="ClosedButton" 
+                    Margin="0,8,13,0" 
+                    Background="#FF6290C3">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5" Background="#FF6290C3">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            
+            <Button Grid.Column="2" 
+                    Grid.Row="0" 
+                    Width="25" 
+                    Content="_" 
+                    FontSize="20" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Top" 
+                    HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" 
+                    Padding="0,-2,0,0"  
+                    Margin="0,8,49,0" 
+                    Click="MinimizedButton" 
+                    Background="#FF6290C3">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            
+            <TextBlock FontFamily="Impact" 
+                       Grid.Column="1" 
+                       Grid.Row="0" 
+                       FontSize="26" 
+                       Margin="1,1,1,0" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       ><Run Text=" Conecci"/><Run Language="es-ar" Text="ó"/><Run Text="n a OBS"/></TextBlock>
 
-            <Button Grid.Column="2" Grid.Row="0" Height="25" Width="25" Content="X" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,-2,0,0" Click="ObsConnect"></Button>
-            <Button Grid.Column="2" Grid.Row="0" Height="25" Width="25" Content="_" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,-2,0,0"  Margin="0,0,30,0" Click="ClosedButton"></Button>
-            <TextBlock FontFamily="Impact" Grid.Column="1" Grid.Row="0" FontSize="26" Margin="1,1,1,0" HorizontalAlignment="Center" VerticalAlignment="Center" ><Run Text=" Conecci"/><Run Language="es-ar" Text="ó"/><Run Text="n a OBS"/></TextBlock>
+            <TextBox FontFamily="Impact" 
+                     Name="PortTXT" 
+                     Grid.Column="0" 
+                     Grid.Row="1" 
+                     Width="200" 
+                     Height=" 30" 
+                     HorizontalAlignment="Center" 
+                     VerticalAlignment="Center" 
+                     Margin="1,1,1,1"  
+                     Text="9999" FontSize="20"
+                     HorizontalContentAlignment="Center" 
+                     VerticalContentAlignment="Center" 
+                     TextAlignment="Center"
+                     Background="#FFC2E7DA" 
+                     BorderBrush="#FFABADB3"  />
+            
+            <TextBlock FontFamily="Impact" 
+                       Grid.Column="1" 
+                       Grid.Row="1"
+                       Text="Server Port" 
+                       Width="200" 
+                       Height=" 30" 
+                       FontSize="20" 
+                       Margin="1,1,0,1" 
+                       TextAlignment="Center"/>
 
-            <TextBox FontFamily="Impact" Name="PortTXT" Grid.Column="0" Grid.Row="1" Width="200" Height=" 30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,1,1,1"  Text="9999" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center"  />
-            <TextBlock FontFamily="Impact" Grid.Column="1" Grid.Row="1" Text="Server Port"  Width="200" Height=" 30" FontSize="20" Margin="1,1,0,1" TextAlignment="Center"/>
+            <PasswordBox FontFamily="Impact" 
+                         Name="PasswordTXT"
+                         Grid.Column="0" 
+                         Grid.Row="2" 
+                         Width="200" 
+                         Height=" 30" 
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Center" 
+                         Margin="1,1,1,1"
+                         FontSize="20" 
+                         HorizontalContentAlignment="Center" 
+                         VerticalContentAlignment="Center" 
+                         BorderBrush="#FFABADB3" 
+                         Background="#FFC2E7DA"  />
+            
+            <TextBlock FontFamily="Impact"
+                       Grid.Column="1" 
+                       Grid.Row="2" 
+                       Width="200"
+                       Height=" 30" 
+                       FontSize="20" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       Margin="1,1,1,1" 
+                       TextAlignment="Center"><Run Language="es-ar" Text="S"/><Run Text="erver Password"/></TextBlock>
 
-            <PasswordBox FontFamily="Impact" Name="PasswordTXT" Grid.Column="0" Grid.Row="2" Width="200" Height=" 30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,1,1,1" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  />
-            <TextBlock FontFamily="Impact" Grid.Column="1" Grid.Row="2"  Width="200" Height=" 30" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,1,1,1" TextAlignment="Center"><Run Language="es-ar" Text="S"/><Run Text="erver Password"/></TextBlock>
+            <TextBox FontFamily="Impact"
+                     Name="NameMicrophone" 
+                     Grid.Column="0" 
+                     Grid.Row="3" 
+                     Width="200" 
+                     Height=" 30" 
+                     HorizontalAlignment="Center" 
+                     VerticalAlignment="Center" 
+                     Margin="1,1,1,1" 
+                     Text="Micro" 
+                     FontSize="20" 
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center" 
+                     Background="#FFC2E7DA"  ></TextBox>
+            
+            <TextBlock FontFamily="Impact"
+                       Grid.Column="1" 
+                       Grid.Row="3"  
+                       Width="200" 
+                       Height=" 30" 
+                       FontSize="20" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" 
+                       Margin="1,1,1,1" 
+                       Text="Microfono" 
+                       TextAlignment="Center"/>
 
-            <TextBox FontFamily="Impact" Name="NameMicrophone" Grid.Column="0" Grid.Row="3" Width="200" Height=" 30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,1,1,1" Text="Micro" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  ></TextBox>
-            <TextBlock FontFamily="Impact" Grid.Column="1" Grid.Row="3"  Width="200" Height=" 30" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,1,1,1" Text="Microfono" TextAlignment="Center"/>
+            <TextBox FontFamily="Impact" 
+                     Name="NameSource" 
+                     Grid.Column="0" 
+                     Grid.Row="4" 
+                     Width="200" 
+                     Height=" 30"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" 
+                     Margin="1,1,1,1"
+                     Text="Musica" 
+                     FontSize="20" 
+                     HorizontalContentAlignment="Center" 
+                     VerticalContentAlignment="Center" 
+                     TextChanged="NameSource_TextChanged"
+                     Background="#FFC2E7DA"/>
+            
+            <TextBlock FontFamily="Impact" 
+                       Grid.Column="1" 
+                       Grid.Row="4" 
+                       Width="200"
+                       Height=" 30" 
+                       FontSize="20" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="1,0,1,1" 
+                       Text="Audio" 
+                       TextAlignment="Center"/>
 
-            <TextBox FontFamily="Impact" Name="NameSource" Grid.Column="0" Grid.Row="4" Width="200" Height=" 30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,1,1,1" Text="Musica" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="NameSourse_TextChanged"  ></TextBox>
-            <TextBlock FontFamily="Impact" Grid.Column="1" Grid.Row="4"  Width="200" Height=" 30" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,0,1,1" Text="Audio" TextAlignment="Center"/>
 
-
-            <Button Name="Conectar" FontFamily="Impact" Grid.Column="1" Grid.Row="5" Margin="1,1,1,1" Content="Conectar OBS" FontSize="24" Click="ObsConnect" Height="39" Width="200">
+            <Button Name="Conectar" 
+                    FontFamily="Impact"
+                    Grid.Column="1"
+                    Grid.Row="5" 
+                    Margin="1,1,1,1"
+                    Content="Conectar OBS"
+                    FontSize="24" 
+                    Click="ObsConnect" 
+                    Height="39"
+                    Width="200" 
+                    Background="#FF6290C3">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">
@@ -75,9 +254,39 @@
                 </Button.Style>
             </Button>
 
-            <TextBox FontFamily="Impact" Name="ChanelName" Grid.Column="0" Grid.Row="7" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Text="marcosfedez96" FontSize="20" TextAlignment="Center" />
-            <TextBlock  FontFamily="Impact" Grid.Row="7" Grid.Column="1"  Text="ID Twitch" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,15,0,0"></TextBlock>
-            <Button FontFamily="Impact" Name="Datos" Grid.Column="1" Grid.Row="8" Margin="1,1,1,1" Content="Conectar Twitch" FontSize="20" Click="TwitchConnect" Height="39" Width="200">
+            <TextBox FontFamily="Impact"
+                     Name="ChanelName" 
+                     Grid.Column="0" 
+                     Grid.Row="7"
+                     Width="200" 
+                     Height="30" 
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" 
+                     Text="marcosfedez96" 
+                     FontSize="20" 
+                     TextAlignment="Center" 
+                     Background="#FFC2E7DA" />
+
+            <TextBlock  FontFamily="Impact"
+                        Grid.Row="7"
+                        Grid.Column="1" 
+                        Text="ID Twitch" 
+                        FontSize="24"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" 
+                        Margin="30,15,0,0"/>
+            
+            <Button FontFamily="Impact" 
+                    Name="Datos"
+                    Grid.Column="1"
+                    Grid.Row="8" 
+                    Margin="1,1,1,1"
+                    Content="Conectar Twitch"
+                    FontSize="20" 
+                    Click="TwitchConnect"
+                    Height="39" 
+                    Width="200" 
+                    Background="#FF6290C3">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">
@@ -92,7 +301,18 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button FontFamily="Impact" Name="Monitoreo" Grid.Column="2" Grid.Row="5" Margin="2,1,2,1" Content="Monitor OBS" FontSize="24" Click="Monitoring" Height="39" Width="200">
+            
+            <Button FontFamily="Impact" 
+                    Name="Monitoreo" 
+                    Grid.Column="2" 
+                    Grid.Row="5" 
+                    Margin="2,1,2,1" 
+                    Content="Monitor OBS" 
+                    FontSize="24" 
+                    Click="Monitoring" 
+                    Height="39" 
+                    Width="200" 
+                    Background="#FF6290C3">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">
@@ -107,11 +327,47 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <TextBlock Grid.Column="2" Grid.Row="9" FontSize="12" TextAlignment="Right"  TextWrapping="WrapWithOverflow" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            
+            <TextBlock Grid.Column="0" 
+                       Grid.Row="9" 
+                       FontSize="12" 
+                       TextAlignment="Center"  
+                       TextWrapping="Wrap" 
+                       HorizontalAlignment="Right" 
+                       VerticalAlignment="Center" 
+                       Foreground="#FFF7E5E5"  >
                 <Hyperlink  NavigateUri="https://cafecito.app/MarcosFedez" RequestNavigate="Donations">
                     Ayuda al proyecto.
             </Hyperlink>
             </TextBlock>
+            
+            <Button FontFamily="Impact" 
+                    x:Name="MonitorTwitch"
+                    Grid.Column="2" 
+                    Grid.Row="8" 
+                    Margin="12,9,12,9" 
+                    Content="Monitor Twitch" 
+                    FontSize="24" 
+                    Click="MonitoringTwitch" 
+                    Height="39" 
+                    Width="200" 
+                    Background="#FF6290C3">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="25">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+
         </Grid>
     </Border>
 </Window>
