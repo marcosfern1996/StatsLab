@@ -23,7 +23,7 @@ namespace StatsLab
             //KeyDown += TuVentana_KeyDown;
 
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(0.1f);
+            timer.Interval = TimeSpan.FromSeconds(10f);
             timer.Tick += rechargedTimer;
             timer.Start();
         }

@@ -39,8 +39,10 @@ D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.Core.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.Core.Enums.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.Core.Interfaces.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.Core.Models.dll
+D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.Helix.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.Helix.Models.dll
+D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Client.Enums.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Communication.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.EventSub.Core.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.EventSub.Websockets.dll
@@ -78,12 +80,14 @@ D:\C# Proyects\StatsLab\StatsLab\bin\Debug\System.Text.Json.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\System.Threading.Channels.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\System.ValueTuple.xml
+D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.Core.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.Core.Enums.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.Core.Interfaces.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.Core.Models.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.Helix.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.Helix.Models.xml
+D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Client.Enums.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.EventSub.Core.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.EventSub.Websockets.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.PubSub.xml
@@ -111,5 +115,3 @@ D:\C# Proyects\StatsLab\StatsLab\obj\Debug\StatsLab.application
 D:\C# Proyects\StatsLab\StatsLab\obj\Debug\StatsLab.csproj.CopyComplete
 D:\C# Proyects\StatsLab\StatsLab\obj\Debug\StatsLab.exe
 D:\C# Proyects\StatsLab\StatsLab\obj\Debug\StatsLab.pdb
-D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.dll
-D:\C# Proyects\StatsLab\StatsLab\bin\Debug\TwitchLib.Api.xml

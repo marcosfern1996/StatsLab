@@ -9,12 +9,16 @@ using TwitchLib.Api;
 using TwitchLib.Api.Helix.Models.Streams;
 using TwitchLib.PubSub;
 using TwitchLib.PubSub.Interfaces;
+using System.Windows.Threading;
+using System.Windows.Media;
+using MaterialDesignColors.Recommended;
 
 namespace StatsLab
 {
 
     public partial class SettingWindows : Window
     {
+        private DispatcherTimer timer;
 
         TwitchConnection _twitchConnection;
         Bandera bandera;        
@@ -22,24 +26,50 @@ namespace StatsLab
 
         public SettingWindows()
         {
-           
+            
             bandera = new Bandera();
-            _twitchConnection = new TwitchConnection();
-            InitializeComponent();
+            _twitchConnection = new TwitchConnection(); 
+            InitializeComponent(); 
+            OBSGrid.Visibility = Visibility.Visible;
+            ShowOBSImg.Width = 60;
+            ShowTwitchImg.Width = 35;
+            TwitchGrid.Visibility = Visibility.Collapsed;
+
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(0.1f);
+            timer.Tick += rechargedTimer;
+            timer.Start();
         }
-        
+        private void rechargedTimer(object sender, EventArgs e)
+        {
+            if (DataSaved.Instance.isTwitchConnected)
+            {
+
+                GridTwitchConnected.Visibility = Visibility.Visible;
+                GridTwitchNotConnected.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                GridTwitchNotConnected.Visibility= Visibility.Visible;
+                GridTwitchConnected.Visibility= Visibility.Collapsed;
+            }
+        }
         private void TwitchConnect(object sender, RoutedEventArgs e)
         {
-            DataSaved.Instance.channelName = ChanelName.Text;
+            if (string.IsNullOrEmpty(ChanelName.Text))
+            {
+                MessageBox.Show("Ingrese el nombre de un canal");
+                
+            }
+            else
+            {
+                DataSaved.Instance.channelName = ChanelName.Text;
 
-            _twitchConnection.ConnectTwitch();
-            DataSaved.Instance.isTwitchConnected = true;
-            /*
-            this._twitchConnection.ConnectTwitchAccount();
-            DataSaved.Instance.idTwitch = IdTwitch.Text;
-            DataSaved.Instance.channelName= ChanelName.Text;
-            bandera.ConectingTwitch();
-            */
+                _twitchConnection.ConnectTwitch();
+
+
+            }
+
         }
 
         private void ClosedButton(object sender, RoutedEventArgs e)
@@ -56,6 +86,7 @@ namespace StatsLab
         {
             
             DataSaved.Instance.PortOBS = PortTXT.Text;
+
             DataSaved.Instance.PasswordOBS = PasswordTXT.Password;
 
             if (string.IsNullOrWhiteSpace(NameSource.Text))
@@ -80,12 +111,12 @@ namespace StatsLab
             DataSaved.Instance.isOpenedOBS();
             OBSConnector.Instance.Connect(DataSaved.Instance.PortOBS, DataSaved.Instance.PasswordOBS);
 
-            if (DataSaved.Instance.isOpenObs )
+            if (DataSaved.Instance.isOpenObs && DataSaved.Instance.isConnectedOBS)
            {
                 Conectar.Content = "Refrescar"; 
                 
             }
-           else if (!DataSaved.Instance.isOpenObs)
+           else if (!DataSaved.Instance.isOpenObs && !DataSaved.Instance.isConnectedOBS)
            {
                MessageBox.Show("Abra OBS antes de continuar");
                Conectar.Content = "Conectar OBS";
@@ -105,16 +136,24 @@ namespace StatsLab
 
         private void NameSource_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            /*List<string> listaDeElementos = new List<string>
-            {
-                "Elemento 1",
-                "Elemento 2",
-                "Elemento 3"
-            };
-            foreach (string elemento in listaDeElementos)
-            {
-                NameSource.Text += elemento + Environment.NewLine;
-            }*/
+            
+        }
+
+        private void ShowOBS_Click(object sender, RoutedEventArgs e)
+        {
+            OBSGrid.Visibility = Visibility.Visible;
+            ShowOBSImg.Width = 60;
+            ShowTwitchImg.Width = 35;
+            TwitchGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowTwitch_Click(object sender, RoutedEventArgs e)
+        {
+
+            OBSGrid.Visibility = Visibility.Collapsed;
+            TwitchGrid.Visibility = Visibility.Visible;
+            ShowOBSImg.Width = 20;
+            ShowTwitchImg.Width = 80;
         }
 
         private void Monitoring(object sender, RoutedEventArgs e)

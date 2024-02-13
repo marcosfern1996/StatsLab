@@ -11,6 +11,8 @@ using System.Diagnostics;
 using System.Threading;
 using OBSWebsocketDotNet.Types.Events;
 using OBSWebsocketDotNet;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace StatsLab
@@ -22,12 +24,12 @@ namespace StatsLab
         private DispatcherTimer timer;
         Helix helix;
         public bool blockTouch = false;
-
+        string[] nombres;
         public StatsView()
         {
             InitializeComponent();
             helix = new Helix();
-            ws =new OBSWebsocket();
+            ws = new OBSWebsocket();
             //KeyDown += TuVentana_KeyDown;
 
             timer = new DispatcherTimer();
@@ -86,8 +88,8 @@ namespace StatsLab
 
         public void UpdateStateMicro()
         {
-            
-            if (DataSaved.Instance.microName != null )
+
+            if (DataSaved.Instance.microName != null)
             {
                 DataMicro();
                 if (OBSConnector.Instance.obs.GetInputMute(DataSaved.Instance.microName) || OBSConnector.Instance.obs.GetInputVolume(DataSaved.Instance.microName).VolumeMul <= 0)
@@ -172,32 +174,14 @@ namespace StatsLab
             }
         }
 
-       
-        
+
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
-            Console.WriteLine(OBSConnector.Instance.obs.GetMediaInputStatus("Musica"));
+           
         }
-        private void Obs_InputVolumeMeters(object sender, InputVolumeMetersEventArgs e)
-        {
-            /*JObject sourses = new JObject()
-            {
-                { "PropertyName", " "}, 
-            }*/
-
-            // Aquí puedes trabajar con los datos de volumen recibidos en e.inputs
-           /* foreach (var input in e.inputs)
-            {
-                var nombreInput = input["Musica"].;
-                Console.WriteLine(nombreInput);
-                
-                // Accede a las propiedades de cada input, por ejemplo:
-                // var nombreInput = input["nombrePropiedad"].ToString();
-            }
-           */
-            Console.WriteLine("Funcionó");
-        }
+        
+      
 
         public void ViewStates()
         {

@@ -56,16 +56,16 @@
                          Orientation="Vertical"
                          Height="70"
                          Width="10"
-                         />
+                         BorderBrush="#292F36"  
+                         Foreground="#4ECDC4" />
             <ProgressBar Name="Source"
                          Grid.Column="1" 
                          Grid.Row="1" 
                          Orientation="Vertical" 
-                         Value="40" 
                          Width="10" 
                          Height="70" 
-                         BorderBrush="#FFF7F7F7" 
-                         Foreground="Black" />
+                         BorderBrush="#292F36" 
+                         Foreground="#4ECDC4" />
             <Image Grid.Column="2" 
                    Grid.Row="1" 
                    StretchDirection="DownOnly" 
@@ -106,7 +106,7 @@
                    Margin="22,8,0,8"/>
             <Button Grid.Row="1" 
                     Click="Button_Click" 
-                    Margin="82,34,0,16" 
+                    Margin="80,0,0,0" 
                     Width="30" d:LayoutOverrides="Width" HorizontalAlignment="Left" Grid.Column="1"/>
 
 
