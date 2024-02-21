@@ -296,6 +296,7 @@
     </ApplicationDefinition>
     <Compile Include="Bandera.cs" />
     <Compile Include="Connection OBS\OBSConnector.cs" />
+    <Compile Include="Connection Twitch\TwitchChat.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="DataSaved.cs" />
     <Compile Include="SettingWindows.xaml.cs">

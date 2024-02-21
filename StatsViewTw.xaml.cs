@@ -1,7 +1,10 @@
-﻿using StatsLab.Connection_Twitch;
+﻿using OBSWebsocketDotNet;
+using StatsLab.Connection_OBS;
+using StatsLab.Connection_Twitch;
 using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace StatsLab
@@ -20,21 +23,59 @@ namespace StatsLab
         {
             InitializeComponent(); 
             _twitchConnection = new TwitchConnection();
-            //KeyDown += TuVentana_KeyDown;
 
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(10f);
+            timer.Interval = TimeSpan.FromSeconds(0.5f);
             timer.Tick += rechargedTimer;
             timer.Start();
+
+            DataSaved.Instance.LoadDocTwitch();
+            MiventanaChat.Left = DataSaved.Instance.posXTwitch;
+            MiventanaChat.Top = DataSaved.Instance.posYTwitch;
+           
+
         }
         private void rechargedTimer(object sender, EventArgs e)
         {
 
-           
+            UpdateStateLock();
             if (DataSaved.Instance.isTwitchConnected)
             {
+                
+
+                    _twitchConnection.readChat();
+                
+                // Console.WriteLine(OBSConnector.Instance.obs.GetStreamStatus().IsActive);
+
                 UpdateStateViewers();
-                UpdateStateLock();
+                
+
+                OBSWebsocket obs = OBSConnector.Instance.obs;
+
+                // Obtén el estado de la transmisión
+                if (DataSaved.Instance.isConnectedOBS)
+                {
+                    bool isStreaming = obs.GetStreamStatus().IsActive;
+                    if (isStreaming)
+                    {
+                        // OBS está transmitiendo
+                        InDirect.Visibility = Visibility.Visible;
+                    }
+                    else if (obs.GetStreamStatus().IsActive)
+                    {
+                        // OBS está reconectándose
+                        InDirect.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        // OBS no está transmitiendo ni reconectándose
+                        InDirect.Visibility = Visibility.Collapsed;
+                    }
+                }
+
+                // Verifica si OBS está actualmente transmitiendo
+                
+                
             }
             
         }
@@ -48,16 +89,15 @@ namespace StatsLab
 
         private void TuVentana_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.F11 && Block.Visibility == Visibility.Visible)
+            if (e.Key == Key.F11  )
             {
-                Block.Visibility = Visibility.Collapsed;
                 Close.Visibility = Visibility.Collapsed;
                 CandadoA.Visibility = Visibility.Collapsed;
                 CandadoA.Visibility= Visibility.Collapsed;
             }
-            else if(e.Key == Key.F11 && Block.Visibility == Visibility.Collapsed)
+            else if(e.Key == Key.F11 )
             {
-                Block.Visibility = Visibility.Visible;
+               
                 Close.Visibility = Visibility.Visible;
                 UpdateStateLock();
                 
@@ -68,15 +108,29 @@ namespace StatsLab
             private void ClosedButton(object sender, RoutedEventArgs e)
         {
             if (!blockTouch)
+            {
+                double posX = MiventanaChat.Left;
+                double posY = MiventanaChat.Top;
+                DataSaved.Instance.SaveDocTwitch(posX, posY);
+                Console.WriteLine("SeGuardo");
                 this.Hide();
+            }
+                
+
         }
 
         private void BlockButton(object sender, RoutedEventArgs e)
         {
             if (blockTouch)
-            { blockTouch = false; }
+            {
+                blockTouch = false;
+               
+            }
             else
-            { blockTouch = true; }
+            { blockTouch = true;
+
+               
+            }
         }
         private void DragWindow(object sender, MouseButtonEventArgs e)
         {
@@ -91,11 +145,15 @@ namespace StatsLab
             {
                 CandadoA.Visibility = Visibility.Visible;
                 CandadoC.Visibility = Visibility.Collapsed;
+                Close.Visibility = Visibility.Visible;
+                MiventanaChat.ResizeMode = ResizeMode.CanResizeWithGrip;
             }
             else if (blockTouch == true)
             {
                 CandadoA.Visibility = Visibility.Collapsed;
                 CandadoC.Visibility = Visibility.Visible;
+                Close.Visibility = Visibility.Collapsed;
+                MiventanaChat.ResizeMode = ResizeMode.NoResize;
             }
         }
     }

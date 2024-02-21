@@ -10,12 +10,12 @@ namespace StatsLab
 
         public void ActualizarMicro()
         {
-            statsView.UpdateStateMicro();           
+///statsView.UpdateStateMicro();           
         }
 
         public void ActualizarSource()
         {
-            statsView.UpdateStateSource();          
+          //  statsView.UpdateStateSource();          
         }
 
         public void ActualizarBarraMicro()

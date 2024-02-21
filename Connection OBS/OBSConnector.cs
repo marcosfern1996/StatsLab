@@ -1,4 +1,5 @@
 ﻿using OBSWebsocketDotNet;
+using OBSWebsocketDotNet.Communication;
 using OBSWebsocketDotNet.Types.Events;
 
 using System;
@@ -11,16 +12,33 @@ namespace StatsLab.Connection_OBS
         public bool micro;
         public bool musica;
         public OBSWebsocket obs;
+        public event EventHandler<InputVolumeMetersEventArgs> InputVolumeMeters;
         public event EventHandler Connected;
         private static OBSConnector _instance;
         
         private OBSConnector()
         {
+            
+            
             obs = new OBSWebsocket();
-
             obs.Connected += OnConnected;
+            
+        }
+/*
+        public void UpdateTracks()
+        {
+            
+            obs.InputVolumeMeters += OBSConnector_InputVolumeMeters;
+            Console.WriteLine("hasta aca llego1");
         }
 
+        private void OBSConnector_InputVolumeMeters(object sender, EventArgs e)
+        {
+           
+            Console.WriteLine("hasta aca llego2");
+            Console.WriteLine(e.ToString()); 
+        }
+*/
         public static OBSConnector Instance
         {
             get
@@ -54,6 +72,7 @@ namespace StatsLab.Connection_OBS
             else
             {
                 MessageBox.Show("Estoy conectado");
+
             }
             
             Connected?.Invoke(this, EventArgs.Empty);

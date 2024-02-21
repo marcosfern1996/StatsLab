@@ -43,10 +43,10 @@
          Background="Transparent"     
          BorderBrush="Transparent"
          Cursor="Hand"
-         Effect = "{x:Null}">
-
-            <Image Name="ShowOBSImg" Height="40" Source="/OBSPNG.png" Cursor="Hand" IsHitTestVisible="False" IsEnabled="False"/>
-        </Button>
+         Effect = "{x:Null}"/>
+        <Image Grid.Column="0" 
+         Grid.Row="2"
+         Margin="2" Name="ShowOBSImg" Height="40" Source="/OBSPNG.png" Cursor="Hand" IsHitTestVisible="False" IsEnabled="False"/>
 
         <Button Grid.Column="0" 
       Grid.Row="3"
@@ -57,11 +57,14 @@
       FontSize="24" 
       Click="ShowTwitch_Click"
       Cursor="Hand"
-      >
-            <Image Name="ShowTwitchImg" Height="50" Source="/TwitchPNG.png"  IsHitTestVisible="False" IsEnabled="False"></Image>
-        </Button>
-
-        <Grid Name="WindowBar"
+                Opacity="0.05"
+      />
+        <Image Grid.Column="0" 
+      Grid.Row="3"
+         Margin="2" Name="ShowTwitchImg" Height="50" Source="/TwitchPNG.png"  IsHitTestVisible="False" IsEnabled="False"></Image>
+        
+            
+            <Grid Name="WindowBar"
                   Margin="10" 
                   Grid.ColumnSpan="3"
                   >
@@ -143,14 +146,52 @@
                     <ColumnDefinition Width="*"  ></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
+
+            <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="30,30,30,30" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width= "60" ></ColumnDefinition>
+                    <ColumnDefinition Width= "60" ></ColumnDefinition>
+                    <ColumnDefinition Width= "60" ></ColumnDefinition>
+                    <ColumnDefinition Width= "60" ></ColumnDefinition>
+                    <ColumnDefinition Width= "60" ></ColumnDefinition>
+                    <ColumnDefinition Width= "60" ></ColumnDefinition>
+                    <ColumnDefinition Width= "60" ></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <CheckBox Name="check0" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></CheckBox>
+                <CheckBox Name="check1" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" ></CheckBox>
+                <CheckBox Name="check2" Grid.Row="0" Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></CheckBox>
+                <CheckBox Name="check3" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></CheckBox>
+                <CheckBox Name="check4" Grid.Row="0" Grid.Column="4"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></CheckBox>
+                <CheckBox Name="check5" Grid.Row="0" Grid.Column="5"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></CheckBox>
+                <CheckBox Name="check6" Grid.Row="0" Grid.Column="6"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></CheckBox>
+                
+                <TextBlock Margin="4" TextWrapping="Wrap" Name="source01"  Grid.Column="0" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                <TextBlock Margin="4" TextWrapping="Wrap" Name="source02"  Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></TextBlock>
+                <TextBlock Margin="4" TextWrapping="Wrap" Name="source03"  Grid.Column="2" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></TextBlock>
+                <TextBlock Margin="4" TextWrapping="Wrap" Name="source04"  Grid.Column="3" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></TextBlock>
+                <TextBlock Margin="4" TextWrapping="Wrap" Name="source05"  Grid.Column="4" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></TextBlock>
+                <TextBlock Margin="4" TextWrapping="Wrap" Name="source06"  Grid.Column="5" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></TextBlock>
+                <TextBlock Margin="4" TextWrapping="Wrap" Name="source07"  Grid.Column="6" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></TextBlock>
+                <Border BorderBrush="Black" Grid.Column="0" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"></Border>
+                <Border BorderBrush="Black" Grid.Column="1" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"></Border>
+                <Border BorderBrush="Black" Grid.Column="2" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"></Border>
+                <Border BorderBrush="Black" Grid.Column="3" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"></Border>
+                <Border BorderBrush="Black" Grid.Column="4" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"></Border>
+                <Border BorderBrush="Black" Grid.Column="5" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"></Border>
+                <Border BorderBrush="Black" Grid.Column="6" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"></Border>
+            </Grid>
+
+                
                 <TextBox FontFamily="Impact" 
                      Name="PortTXT" 
                      Grid.Column="0" 
@@ -167,8 +208,8 @@
                      BorderBrush="#FFABADB3" Text="4444"  />
 
                 <TextBlock FontFamily="Impact" 
-                       Grid.Column="1" 
-                       Grid.Row="1"
+                       Grid.Column="0" 
+                       Grid.Row="0"
                        Text="Server Port" 
                        Width="200" 
                        Height=" 25" 
@@ -178,8 +219,8 @@
 
                 <PasswordBox FontFamily="Impact" 
                          Name="PasswordTXT"
-                         Grid.Column="0" 
-                         Grid.Row="2" 
+                         Grid.Column="1" 
+                         Grid.Row="1" 
                          Width="200" 
                          Height=" 25" 
                          HorizontalAlignment="Center" 
@@ -193,7 +234,7 @@
 
                 <TextBlock FontFamily="Impact"
                        Grid.Column="1" 
-                       Grid.Row="2" 
+                       Grid.Row="0" 
                        Width="200"
                        Height=" 25" 
                        FontSize="16" 
@@ -202,64 +243,18 @@
                        Margin="3" 
                        TextAlignment="Center"><Run Language="es-ar" Text="S"/><Run Text="erver Password"/></TextBlock>
 
-                <TextBox FontFamily="Impact"
-                     Name="NameMicrophone" 
-                     Grid.Column="0" 
-                     Grid.Row="3" 
-                     Width="200" 
-                     Height=" 25" 
-                     HorizontalAlignment="Center" 
-                     VerticalAlignment="Center" 
-                     Margin="1,1,1,1" 
-                     FontSize="16" 
-                     HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center" 
-                     Background="#FFC2E7DA" Text="Micro"  />
+               
+                
 
-                <TextBlock FontFamily="Impact"
-                       Grid.Column="1" 
-                       Grid.Row="3"  
-                       Width="200" 
-                       Height=" 25" 
-                       FontSize="16" 
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" 
-                       Margin="1,1,1,1" 
-                       Text="Microfono" 
-                       TextAlignment="Center"/>
+               
 
-                <TextBox FontFamily="Impact" 
-                     Name="NameSource" 
-                     Grid.Column="0" 
-                     Grid.Row="4" 
-                     Width="200" 
-                     Height=" 25"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center" 
-                     Margin="1,1,1,1" 
-                     FontSize="16" 
-                     HorizontalContentAlignment="Center" 
-                     VerticalContentAlignment="Center" 
-                     TextChanged="NameSource_TextChanged"
-                     Background="#FFC2E7DA" Text="Musica"/>
-
-                <TextBlock FontFamily="Impact" 
-                       Grid.Column="1" 
-                       Grid.Row="4" 
-                       Width="200"
-                       Height=" 25" 
-                       FontSize="16" 
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Margin="1,0,1,1" 
-                       Text="Audio" 
-                       TextAlignment="Center"/>
+              
 
 
                 <Button Name="Conectar" 
                     FontFamily="Impact"
                     Grid.Column="0"
-                    Grid.Row="5" 
+                    Grid.Row="2" 
                     Margin="2"
                     Content="Conectar OBS"
                     FontSize="16" 
@@ -285,7 +280,7 @@
             <Button FontFamily="Impact" 
              Name="Monitoreo" 
              Grid.Column="2" 
-             Grid.Row="5" 
+             Grid.Row="2" 
              Margin="1" 
              Content="Monitor OBS" 
              FontSize="16" 
@@ -318,21 +313,21 @@
         </Grid>
 
 
-            <Grid Name="TwitchGrid" Grid.Column="1" 
+        <Grid Name="TwitchGrid" Grid.Column="1" 
                   Grid.ColumnSpan="2" 
                   Grid.Row="1" 
                   Grid.RowSpan="5"
                   Background="#CC655F5F">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"  ></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"  ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
 
             <Grid Grid.Column="0"
                   Grid.ColumnSpan="2"
@@ -353,7 +348,7 @@
                       Grid.Row="0"
                       Grid.RowSpan="2"
                       Background="#991BDC00">
-                   
+
                 </Grid>
 
                 <Border  BorderBrush="#1A1B41" 
@@ -362,7 +357,7 @@
                       Margin="9,48,9,-4"
              ></Border>
             </Grid>
-            
+
 
             <TextBox FontFamily="Impact"
                   Name="ChanelName" 
@@ -374,9 +369,10 @@
                   VerticalAlignment="Center" 
                   FontSize="20" 
                   TextAlignment="Center" 
-                  Background="#FFC2E7DA" />
+                  Background="#FFC2E7DA" 
+                     Text="marcosfedez96"/>
 
-                <TextBlock  FontFamily="Impact"
+            <TextBlock  FontFamily="Impact"
                      Grid.Row="1"
                      Grid.Column="1" 
                      Text="ID Twitch" 
@@ -385,7 +381,7 @@
                      VerticalAlignment="Top" 
                      Margin="30,15,0,0"/>
 
-                <Button FontFamily="Impact" 
+            <Button FontFamily="Impact" 
          Name="Datos"
          Grid.Column="0"
          Grid.Row="2" 
@@ -396,22 +392,22 @@
          Height="39" 
          Width="200" 
          Background="#FF6290C3" Cursor="Hand">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="20">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="20">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
 
-                <Button FontFamily="Impact" 
+            <Button FontFamily="Impact" 
         x:Name="MonitorTwitch"
         Grid.Column="1" 
         Grid.Row="2" 
@@ -422,20 +418,20 @@
         Height="39" 
         Width="200" 
         Background="#FF6290C3" Cursor="Hand">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="25">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="25">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Border Grid.ColumnSpan="3" 
          Grid.RowSpan="5" 
          BorderThickness="12" 
@@ -444,7 +440,7 @@
          Margin="-6,-6,-6,-6"
          ></Border>
         </Grid>
-
+        
 
             <TextBlock Grid.Column="0" 
                        Grid.Row="4" 
