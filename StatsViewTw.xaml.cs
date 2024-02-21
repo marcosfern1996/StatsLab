@@ -30,9 +30,15 @@ namespace StatsLab
             timer.Start();
 
             DataSaved.Instance.LoadDocTwitch();
-            MiventanaChat.Left = DataSaved.Instance.posXTwitch;
-            MiventanaChat.Top = DataSaved.Instance.posYTwitch;
-           
+            MyWindowTwitch.Left = DataSaved.Instance.posXTwitch;
+            MyWindowTwitch.Top = DataSaved.Instance.posYTwitch;
+
+            if( DataSaved.Instance.heightTwitch > 10 && DataSaved.Instance.widthTwitch> 10){
+                MyWindowTwitch.Height = DataSaved.Instance.heightTwitch;
+                MyWindowTwitch.Width = DataSaved.Instance.widthTwitch;
+
+            }
+
 
         }
         private void rechargedTimer(object sender, EventArgs e)
@@ -109,9 +115,11 @@ namespace StatsLab
         {
             if (!blockTouch)
             {
-                double posX = MiventanaChat.Left;
-                double posY = MiventanaChat.Top;
-                DataSaved.Instance.SaveDocTwitch(posX, posY);
+                double posX = MyWindowTwitch.Left;
+                double posY = MyWindowTwitch.Top;
+                double winHeigh = MyWindowTwitch.Height;
+                double winWidth = MyWindowTwitch.Width;
+                DataSaved.Instance.SaveDocTwitch(posX, posY, winHeigh, winWidth);
                 Console.WriteLine("SeGuardo");
                 this.Hide();
             }
@@ -146,14 +154,16 @@ namespace StatsLab
                 CandadoA.Visibility = Visibility.Visible;
                 CandadoC.Visibility = Visibility.Collapsed;
                 Close.Visibility = Visibility.Visible;
-                MiventanaChat.ResizeMode = ResizeMode.CanResizeWithGrip;
+                MyWindowTwitch.ResizeMode = ResizeMode.CanResizeWithGrip;
+                MyWindowTwitch.BorderBrush = Brushes.Black;
             }
             else if (blockTouch == true)
             {
                 CandadoA.Visibility = Visibility.Collapsed;
                 CandadoC.Visibility = Visibility.Visible;
                 Close.Visibility = Visibility.Collapsed;
-                MiventanaChat.ResizeMode = ResizeMode.NoResize;
+                MyWindowTwitch.ResizeMode = ResizeMode.NoResize;
+                MyWindowTwitch.BorderBrush = Brushes.Transparent;
             }
         }
     }

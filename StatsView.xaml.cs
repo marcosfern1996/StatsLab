@@ -3,6 +3,7 @@ using StatsLab.Connection_OBS;
 using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 using TwitchLib.Api.Helix;
 
@@ -30,11 +31,16 @@ namespace StatsLab
             timer.Start();
 
             DataSaved.Instance.LoadDocObs();
-            MyVentanaObs.Left = DataSaved.Instance.posXObs;
-            MyVentanaObs.Top = DataSaved.Instance.posYObs;
+            MyWindowObs.Left = DataSaved.Instance.posXObs;
+            MyWindowObs.Top = DataSaved.Instance.posYObs;
+            if (DataSaved.Instance.heightObs> 10 && DataSaved.Instance.widthObs > 10)
+            {
+                MyWindowObs.Height = DataSaved.Instance.heightObs;
+                MyWindowObs.Width = DataSaved.Instance.widthObs;
+            }
 
-            Console.WriteLine("Actual X"+MyVentanaObs.Left);
-            Console.WriteLine("Actual Y "+MyVentanaObs.Top);
+            Console.WriteLine("Actual X"+ MyWindowObs.Left);
+            Console.WriteLine("Actual Y "+ MyWindowObs.Top);
 
         }
 
@@ -249,9 +255,11 @@ namespace StatsLab
         {
             if (!blockTouch)
             {
-                double posX = MyVentanaObs.Left;
-                double posY = MyVentanaObs.Top;
-                DataSaved.Instance.SaveDocObs(posX, posY);
+                double posX = MyWindowObs.Left;
+                double posY = MyWindowObs.Top; 
+                double winHeigh = MyWindowObs.Height;
+                double winWidth = MyWindowObs.Width;
+                DataSaved.Instance.SaveDocObs(posX, posY, winHeigh , winWidth);
                 Console.WriteLine("SeGuardo");
                 this.Hide();
             }
@@ -281,16 +289,18 @@ namespace StatsLab
             {
                 CandadoA.Visibility = Visibility.Visible;
                 CandadoC.Visibility = Visibility.Collapsed;
-                MyVentanaObs.ResizeMode = ResizeMode.CanResizeWithGrip;
-
+                MyWindowObs.ResizeMode = ResizeMode.CanResizeWithGrip;
                 Close.Visibility = Visibility.Visible;
+                MyWindowObs.BorderBrush = Brushes.Black;
             }
             else if (blockTouch == true)
             {
                 CandadoA.Visibility = Visibility.Collapsed;
                 CandadoC.Visibility = Visibility.Visible;
                 Close.Visibility = Visibility.Collapsed;
-                MyVentanaObs.ResizeMode = ResizeMode.NoResize;
+
+                MyWindowObs.BorderBrush = Brushes.Transparent;
+                MyWindowObs.ResizeMode = ResizeMode.NoResize;
             }
         }
 

@@ -28,6 +28,8 @@ namespace StatsLab
 
         public double posXObs { get; set; }
         public double posYObs { get; set; }
+        public double heightObs { get; set; }
+        public double widthObs { get; set; }
 
 
         public string SourceNum0 { get; set; }
@@ -59,6 +61,8 @@ namespace StatsLab
 
         public double posXTwitch {  get; set; }
         public double posYTwitch {  get; set; }
+        public double heightTwitch { get; set; }
+        public double widthTwitch { get; set; }
 
         public TcpClient TwitchCtls { get; set; }
         public StreamReader reader { get; set; }
@@ -96,7 +100,7 @@ namespace StatsLab
         }
 
 
-        public void SaveDocTwitch(double posX ,double posY)
+        public void SaveDocTwitch(double posX ,double posY , double windheigh, double windwidth)
         {
             // Variables que deseas guardar
 
@@ -113,6 +117,8 @@ namespace StatsLab
                     // Escribe las variables en el archivo
                     siteTwichWIndow.WriteLine($"{posX}");
                     siteTwichWIndow.WriteLine($"{posY}");
+                    siteTwichWIndow.WriteLine($"{windheigh}");
+                    siteTwichWIndow.WriteLine($"{windwidth}");
                 }
 
                 Console.WriteLine("Datos guardados correctamente en el archivo.");
@@ -142,6 +148,8 @@ namespace StatsLab
                    
                     posXTwitch = double.Parse(lector.ReadLine());
                     posYTwitch = double.Parse(lector.ReadLine());
+                    heightTwitch = double.Parse(lector.ReadLine());
+                    widthTwitch= double.Parse(lector.ReadLine());
                 }
 
                 // Muestra los datos cargados
@@ -154,7 +162,7 @@ namespace StatsLab
             }
         }
         
-        public void SaveDocObs(double posX ,double posY)
+        public void SaveDocObs(double posX ,double posY, double windheigh, double windwidth)
         {
             // Variables que deseas guardar
 
@@ -171,6 +179,8 @@ namespace StatsLab
                     // Escribe las variables en el archivo
                     siteTwichWIndow.WriteLine($"{posX}");
                     siteTwichWIndow.WriteLine($"{posY}");
+                    siteTwichWIndow.WriteLine($"{windheigh}");
+                    siteTwichWIndow.WriteLine($"{windwidth}");
                 }
 
                 Console.WriteLine("Datos guardados correctamente en el archivo.");
@@ -203,6 +213,8 @@ namespace StatsLab
 
                     posXObs = double.Parse(lector.ReadLine());
                     posYObs = double.Parse(lector.ReadLine());
+                    heightObs = double.Parse(lector.ReadLine());
+                    widthObs = double.Parse(lector.ReadLine());
                 }
 
                 // Muestra los datos cargados

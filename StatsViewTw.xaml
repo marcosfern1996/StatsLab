@@ -17,7 +17,7 @@
         Title="Window1" Height="400" Width="300" 
         MouseDown="DragWindow"
         PreviewKeyDown="TuVentana_KeyDown"
-        x:Name="MiventanaChat"
+        x:Name="MyWindowTwitch"
         >
     <Grid >
 
@@ -36,11 +36,11 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-           
+
             <Button Name = "Close" Grid.Column="3" Content="X" FontSize="8" Click="ClosedButton" Width="15" Height="15" HorizontalAlignment="Right"/>
-            
+
             <Image Source="/Personas1.png"  Grid.Column="0" OpacityMask="#7FFFFFFF" Grid.Row="1" Grid.ColumnSpan="2" Margin="-1,0,0,1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
-            
+
             <Image Margin="5" Name="CandadoA" Source="/Candado_A.png"  Grid.Column="2" Grid.Row="1"/>
             <Image Margin="5" Name="CandadoC" Source="/candado_C.png" Grid.Column="2" Grid.Row="1"/>
             <Button Grid.Column="2" 
@@ -61,25 +61,19 @@
                      Grid.Row="1" 
                      Fill="Red" HorizontalAlignment="Left" Margin="8,17,0,18"
              ></Ellipse>
-           <Grid Grid.Column="0" 
+            <Grid Grid.Column="0" 
                   Grid.Row="2" 
                   Grid.ColumnSpan="4" Margin="20"
                   
                   >
-                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <WrapPanel Orientation="Vertical" >
-                        <TextBlock Text="Hola chat" FontSize="15" Margin="10" Width="240"></TextBlock>
-                        <TextBlock Text="Hola chat" FontSize="15" Margin="10" Width="240"></TextBlock>
-                        <TextBlock Text="Hola chat" FontSize="15" Margin="10" Width="240"></TextBlock>
-                        <TextBlock Text="Hola chat" FontSize="15" Margin="10" Width="240"></TextBlock>
-                        <TextBlock Text="Hola chat" FontSize="15" Margin="10" Width="240"></TextBlock>
-                        <TextBlock Text="Hola chat" FontSize="15" Margin="10" Width="240"></TextBlock>
-                        <TextBlock Text="Hola chat" FontSize="15" Margin="10" Width="240"></TextBlock>
 
-                        
-                    </WrapPanel>
-                </ScrollViewer>
-                    
+                <WrapPanel Orientation="Vertical" Background="#19808080" 
+                               >
+                    <TextBlock  Foreground="Purple" FontSize="30" TextWrapping="Wrap" Text="Futuro chat de twitch" Height="143" Width="256"/>
+
+
+                </WrapPanel>
+
             </Grid>
         </Grid>
     </Grid>
