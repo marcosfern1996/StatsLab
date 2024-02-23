@@ -1,19 +1,16 @@
-﻿using StatsLab.Connection_OBS;
+﻿using OBSWebsocketDotNet.Types;
+using StatsLab.Connection_OBS;
 using StatsLab.Connection_Twitch;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using TwitchLib.Api; 
-using TwitchLib.Api.Helix.Models.Streams;
-using TwitchLib.PubSub;
-using TwitchLib.PubSub.Interfaces;
 using System.Windows.Threading;
+using System.Windows.Forms;
 using System.Windows.Media;
-using MaterialDesignColors.Recommended;
-using OBSWebsocketDotNet.Types;
-using System.Linq;
+using System.Windows.Controls;
+
 
 namespace StatsLab
 {
@@ -23,13 +20,18 @@ namespace StatsLab
         public string[] sourcesNames;
         public int i =0;
         private DispatcherTimer timer;
-
+        private readonly NotifyIcon notifyIcon;
+        System.Drawing.Icon icon = new System.Drawing.Icon("Images/HUB-Blanco.ico");
+        
         TwitchConnection _twitchConnection;
         Bandera bandera; 
         public string portTxt, passwordTxt, micro, souseAudio1;
+        public int a = 1;
+
 
         public SettingWindows()
         {
+            notifyIcon = new NotifyIcon();
             bandera = new Bandera();
             _twitchConnection = new TwitchConnection(); 
             InitializeComponent(); 
@@ -42,7 +44,31 @@ namespace StatsLab
             timer.Interval = TimeSpan.FromSeconds(0.1f);
             timer.Tick += rechargedTimer;
             timer.Start();
+
+            notifyIcon = new NotifyIcon();
+            notifyIcon.Icon = icon; // Reemplaza "tuIcono.ico" con la ruta a tu archivo de icono
+            notifyIcon.Visible = true;
+            notifyIcon.DoubleClick += (sender, e) => ShowMainWindow();
+
+
+            notifyIcon.ContextMenuStrip = new ContextMenuStrip();
+            notifyIcon.ContextMenuStrip.Items.Add("Activar Candados", null, ActivateLock );
+            notifyIcon.ContextMenuStrip.Items.Add("Desactivar Candados", null, DescativateLock );
+            notifyIcon.ContextMenuStrip.Items.Add("Cerrar Aplicacion", null, ClosedButton );
+            
         }
+        
+        private void ActivateLock(object sender, EventArgs e)
+        {
+            DataSaved.Instance.isBlockObs = false;
+            DataSaved.Instance.isBlockTwitch= false;
+        }
+        private void DescativateLock(object sender, EventArgs e)
+        {
+            DataSaved.Instance.isBlockObs = true;
+            DataSaved.Instance.isBlockTwitch= true;
+        }
+
         private void rechargedTimer(object sender, EventArgs e)
         {
             if (DataSaved.Instance.isTwitchConnected)
@@ -65,7 +91,7 @@ namespace StatsLab
         {
             if (string.IsNullOrEmpty(ChanelName.Text))
             {
-                MessageBox.Show("Ingrese el nombre de un canal");
+                System.Windows.MessageBox.Show("Ingrese el nombre de un canal");
                 
             }
             else
@@ -80,12 +106,43 @@ namespace StatsLab
 
         private void ClosedButton(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            notifyIcon.Dispose();
+            System.Windows.Application.Current.Shutdown();
+        }
+        private void ClosedButton(object sender, EventArgs e)
+        {
+            notifyIcon.Dispose();
+            System.Windows.Application.Current.Shutdown();
         }
 
+        private void MinimizedHiddenButton(object sender, RoutedEventArgs e)
+        {
+            DataSaved.Instance.isBlockTwitch = true;
+            DataSaved.Instance.isBlockObs = true;
+            this.WindowState = WindowState.Minimized;
+
+            if (this.WindowState == WindowState.Minimized)
+                this.Hide();
+
+            base.OnStateChanged(e);
+        }
         private void MinimizedButton(object sender, RoutedEventArgs e)
         {
+           // DataSaved.Instance.isBlockTwitch = true;
+            //DataSaved.Instance.isBlockObs= true;
             this.WindowState = WindowState.Minimized;
+
+           
+        }
+        private void ShowMainWindow()
+        {
+            this.Topmost = true;
+            DataSaved.Instance.isBlockTwitch= false;
+            DataSaved.Instance.isBlockObs= false;
+            // Restaura o muestra la ventana principal
+            this.Show();
+            this.WindowState = WindowState.Normal;
+            this.Topmost = false;
         }
 
         private  void ObsConnect(object sender, RoutedEventArgs e)
@@ -110,7 +167,7 @@ namespace StatsLab
             }
            else if (!DataSaved.Instance.isOpenObs && !DataSaved.Instance.isConnectedOBS)
            {
-               MessageBox.Show("Abra OBS antes de continuar");
+                System.Windows.MessageBox.Show("Abra OBS antes de continuar");
                Conectar.Content = "Conectar OBS";
            }
            
@@ -120,11 +177,20 @@ namespace StatsLab
         void getNameImput()
         {
             List<InputBasicInfo> sceneItems = OBSConnector.Instance.obs.GetInputList();
-
+            
+           
+            
             var filteredSources = sceneItems
-             .Where(item => item.InputKind == "wasapi_output_capture" || item.InputKind == "wasapi_input_capture")
+             .Where(item => item.InputName == ""|| item.InputKind == "wasapi_output_capture" || item.InputKind == "wasapi_input_capture" || item.InputKind == "ffmpeg_source")
+             .OrderBy(item => item.InputName)
+             
              .ToArray();
 
+            if (a < 2)
+            {
+                Console.WriteLine("lista de inputs " + filteredSources);
+                a++;
+            }
             sourcesNames = filteredSources.Select(item => item.InputName.ToString()).ToArray();
             for ( int i = 0; i < sourcesNames.Length; i++)
             {
@@ -308,11 +374,11 @@ namespace StatsLab
             }
             if(!DataSaved.Instance.isOpenObs)
             {
-                MessageBox.Show("Abra OBS antes de continuar");
+                System.Windows.MessageBox.Show("Abra OBS antes de continuar");
             }
             if (!DataSaved.Instance.isConnectedOBS && DataSaved.Instance.isOpenObs)
             {
-                MessageBox.Show("Faltan datos de obs");
+                System.Windows.MessageBox.Show("Faltan datos de obs");
             }
 
 

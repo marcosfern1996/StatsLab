@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="StatsLab.exe" version="1.0.0.5" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="StatsLab.exe" version="1.0.0.9" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="HUB-Blanco.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
     <assemblyIdentity name="StatsLab" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
@@ -246,14 +247,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="StatsLab.exe" size="782816">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="StatsLab.exe" size="855520">
       <assemblyIdentity name="StatsLab" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>oY58Z79zLpdCvwkTgDj9Et6h7wzIdayrKlXXRtOF4e4=</dsig:DigestValue>
+        <dsig:DigestValue>ut+dWLSzxvylyhmJ21V0+ejSI922MvwS3MXklrBO53s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -569,6 +570,15 @@
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="HUB-Blanco.ico" size="35966">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>/NAeaVwg8e0sdO2+6q5IR+45dgQO9rJiRtH71/m7HRg=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="runtimes\win-arm64\native\WebView2Loader.dll" size="137792">
     <hash>
       <dsig:Transforms>
@@ -603,6 +613,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>4mbBBYDR5eTwT25SQ0nu3pNnrYDT0IMz7diBxcnxNf8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="StatsLab.pdb" size="140800">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>2thUcmK7/rU2361AqqPOybxpbXhI8e36c85SulkdtPU=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

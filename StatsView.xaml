@@ -61,6 +61,8 @@
                    VerticalAlignment="Center" 
                     HorizontalAlignment="Center" 
                    d:LayoutOverrides="Width"/>
+                
+                
             <Button Grid.Column="1" 
           Grid.Row="0"
              Margin="2"

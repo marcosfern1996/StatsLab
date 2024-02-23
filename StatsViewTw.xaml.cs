@@ -23,7 +23,7 @@ namespace StatsLab
         {
             InitializeComponent(); 
             _twitchConnection = new TwitchConnection();
-
+            ShowInTaskbar = false;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(0.5f);
             timer.Tick += rechargedTimer;
@@ -149,21 +149,33 @@ namespace StatsLab
         }
         public void UpdateStateLock()
         {
-            if (blockTouch == false)
+            if(DataSaved.Instance.isBlockTwitch) {
+                CandadoC.Visibility = Visibility.Collapsed;
+                CandadoA.Visibility = Visibility.Collapsed;
+            }else if(!DataSaved.Instance.isBlockTwitch && blockTouch == false)
             {
                 CandadoA.Visibility = Visibility.Visible;
                 CandadoC.Visibility = Visibility.Collapsed;
+            }else if(!DataSaved.Instance.isBlockTwitch && blockTouch)
+            {
+                CandadoA.Visibility = Visibility.Collapsed;
+                CandadoC.Visibility = Visibility.Visible;
+            }
+            if (blockTouch == false)
+            {
+                
                 Close.Visibility = Visibility.Visible;
                 MyWindowTwitch.ResizeMode = ResizeMode.CanResizeWithGrip;
+                MyWindowTwitch.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#19E4E3E3"));
                 MyWindowTwitch.BorderBrush = Brushes.Black;
             }
             else if (blockTouch == true)
             {
-                CandadoA.Visibility = Visibility.Collapsed;
-                CandadoC.Visibility = Visibility.Visible;
+                
                 Close.Visibility = Visibility.Collapsed;
                 MyWindowTwitch.ResizeMode = ResizeMode.NoResize;
                 MyWindowTwitch.BorderBrush = Brushes.Transparent;
+                MyWindowTwitch.Background = Brushes.Transparent;
             }
         }
     }

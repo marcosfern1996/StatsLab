@@ -1,9 +1,7 @@
-﻿using System.Diagnostics;
-using System.Net.Sockets;
-
+﻿using System;
+using System.Diagnostics;
 using System.IO;
-using OBSWebsocketDotNet.Types.Events;
-using System;
+using System.Net.Sockets;
 
 namespace StatsLab
 {
@@ -17,6 +15,8 @@ namespace StatsLab
             get { return isOpenObs; }
             set { isOpenObs = value; }
         }
+        public bool isBlockObs { get;set; }
+        public bool isBlockTwitch { get;set; }
 
         public string PortOBS { get; set; }
         public string PasswordOBS { get; set; }

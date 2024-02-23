@@ -1,28 +1,16 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Media.Imaging;
-using TwitchLib.Api;
-using TwitchLib.Api.Auth;
-using TwitchLib.Api.Helix;
-using TwitchLib.Api.Core.Enums;
-using TwitchLib.Client;
-using System.Net.Http;
-using TwitchLib.PubSub;
-using TwitchLib.PubSub.Events;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Net;
 using System.Net.Sockets;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using System.Windows.Interop;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using TwitchLib.Api;
 
 namespace StatsLab.Connection_Twitch
 {
-    
+
     public static class Config
     {
         public static readonly string TwitchClientId = "30y1o0f4aisqenvpgnm3duwa8q77cl";

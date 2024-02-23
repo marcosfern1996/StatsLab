@@ -24,7 +24,7 @@ namespace StatsLab
             InitializeComponent();
             helix = new Helix();
             ws = new OBSWebsocket();
-
+            ShowInTaskbar = false;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(0.05f);
             timer.Tick += rechargedTimer;
@@ -285,21 +285,36 @@ namespace StatsLab
 
         public void UpdateStateLock()
         {
-            if (blockTouch == false)
+            if (DataSaved.Instance.isBlockObs)
+            {
+                CandadoC.Visibility = Visibility.Collapsed;
+                CandadoA.Visibility = Visibility.Collapsed;
+            }
+            else if (!DataSaved.Instance.isBlockObs && blockTouch == false)
             {
                 CandadoA.Visibility = Visibility.Visible;
                 CandadoC.Visibility = Visibility.Collapsed;
-                MyWindowObs.ResizeMode = ResizeMode.CanResizeWithGrip;
-                Close.Visibility = Visibility.Visible;
-                MyWindowObs.BorderBrush = Brushes.Black;
             }
-            else if (blockTouch == true)
+            else if (!DataSaved.Instance.isBlockObs && blockTouch)
             {
                 CandadoA.Visibility = Visibility.Collapsed;
                 CandadoC.Visibility = Visibility.Visible;
+            }
+            if (blockTouch == false)
+            {
+                
+                MyWindowObs.ResizeMode = ResizeMode.CanResizeWithGrip;
+                Close.Visibility = Visibility.Visible;
+                MyWindowObs.BorderBrush = Brushes.Black;
+                MyWindowObs.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#19E4E3E3"));
+            }
+            else if (blockTouch == true)
+            {
+               
                 Close.Visibility = Visibility.Collapsed;
 
-                MyWindowObs.BorderBrush = Brushes.Transparent;
+                MyWindowObs.BorderBrush = Brushes.Transparent; 
+                MyWindowObs.Background = Brushes.Transparent;
                 MyWindowObs.ResizeMode = ResizeMode.NoResize;
             }
         }
