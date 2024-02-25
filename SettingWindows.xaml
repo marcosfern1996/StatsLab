@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:StatsLab"
         mc:Ignorable="d"
         Background="Transparent"
-        BorderBrush="Transparent"
          ResizeMode="NoResize"
          WindowStartupLocation="CenterScreen"
         MouseDown="DragWindow"
@@ -18,7 +17,7 @@
 
   
 
-        <Grid Margin="20" Background="#335F5E5E">
+        <Grid Margin="20" Background="#FF20365B">
           
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80"></ColumnDefinition>
@@ -26,7 +25,7 @@
                 <ColumnDefinition Width="*"  ></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -63,8 +62,8 @@
         
             
             <Grid Name="WindowBar"
-                  Margin="10" 
-                  Grid.ColumnSpan="3"
+                  Margin="0" 
+                  Grid.ColumnSpan="3" Background="Black"
                   >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"></ColumnDefinition>
@@ -72,13 +71,14 @@
                     <ColumnDefinition Width="*"  ></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
                 </Grid.RowDefinitions>
                         <Button Grid.Column="2" 
                  Grid.Row="0" 
-                 Width="25" 
+                 Width="15" 
+                                Height="15"
                  Content="X" 
-                 FontSize="20" 
+                 FontSize="10" 
                  HorizontalAlignment="Right" 
                  VerticalAlignment="Top" 
                  HorizontalContentAlignment="Center" 
@@ -104,9 +104,10 @@
 
                 <Button Grid.Column="2" 
                  Grid.Row="0" 
-                 Width="25" 
+                 Width="15"
+                        Height="15"
                  Content="_" 
-                 FontSize="20" 
+                 FontSize="10" 
                  HorizontalAlignment="Right" 
                  VerticalAlignment="Top" 
                  HorizontalContentAlignment="Center" 
@@ -131,9 +132,10 @@
                 </Button>
                 <Button Grid.Column="2" 
                  Grid.Row="0" 
-                 Width="25" 
-                 Content="." 
-                 FontSize="20" 
+                 Width="15" 
+                        Height="15"
+                 Content="o" 
+                 FontSize="10" 
                  HorizontalAlignment="Right" 
                  VerticalAlignment="Top" 
                  HorizontalContentAlignment="Center" 
@@ -165,7 +167,7 @@
                Grid.ColumnSpan="2" 
                Grid.Row="1" 
                Grid.RowSpan="5"
-                  Background="#CC655F5F">
+                  Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"  ></ColumnDefinition>
@@ -235,6 +237,7 @@
                 <TextBlock FontFamily="Impact" 
                        Grid.Column="0" 
                        Grid.Row="0"
+                           Foreground="White"
                        Text="Server Port" 
                        Width="200" 
                        Height=" 25" 
@@ -259,6 +262,8 @@
 
                 <TextBlock FontFamily="Impact"
                        Grid.Column="1" 
+                           Foreground="White"
+
                        Grid.Row="0" 
                        Width="200"
                        Height=" 25" 
@@ -307,7 +312,7 @@
              Grid.Column="2" 
              Grid.Row="2" 
              Margin="1" 
-             Content="Monitor OBS" 
+             Content="Monitoreo" 
              FontSize="16" 
              Click="Monitoring" 
              Height="25" 
@@ -329,10 +334,10 @@
             </Button>
             <Border Grid.ColumnSpan="3" 
              Grid.RowSpan="7" 
-             BorderThickness="12" 
-              CornerRadius="15"
-             BorderBrush="#1A1B41"
-             Margin="-6,-6,-6,-6"
+             BorderThickness="5" 
+              CornerRadius="0,5,5,5"
+             BorderBrush="Black"
+             Margin="-1"
              ></Border>
 
         </Grid>
@@ -342,23 +347,22 @@
                   Grid.ColumnSpan="2" 
                   Grid.Row="1" 
                   Grid.RowSpan="5"
-                  Background="#CC655F5F">
+                  Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"  ></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Grid Grid.Column="0"
                   Grid.ColumnSpan="2"
                   Grid.Row="0"
-                  Grid.RowSpan="2">
-                <Grid Margin="13,50,13,0"
+                  Grid.RowSpan="1">
+                <Grid Margin="4"
                       Name="GridTwitchNotConnected" 
                       Grid.Column="0"
                       Grid.ColumnSpan="2"
@@ -366,7 +370,7 @@
                       Grid.RowSpan="2"
                       Background="#99BB2C2C">
                 </Grid>
-                <Grid Margin="13,50,13,0"
+                <Grid Margin="4"
                       Name="GridTwitchConnected" 
                       Grid.Column="0"
                       Grid.ColumnSpan="2"
@@ -378,8 +382,8 @@
 
                 <Border  BorderBrush="#1A1B41" 
                       BorderThickness="4" 
-                      CornerRadius="9" 
-                      Margin="9,48,9,-4"
+                      CornerRadius="4" 
+                      Margin="3"
              ></Border>
             </Grid>
 
@@ -387,9 +391,9 @@
             <TextBox FontFamily="Impact"
                   Name="ChanelName" 
                   Grid.Column="0" 
-                  Grid.Row="1"
+                  Grid.Row="0"
                   Width="200" 
-                  Height="30" 
+                  Height="25" 
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center" 
                   FontSize="20" 
@@ -398,23 +402,25 @@
                      Text="marcosfedez96"/>
 
             <TextBlock  FontFamily="Impact"
-                     Grid.Row="1"
+                     Grid.Row="0"
                      Grid.Column="1" 
                      Text="ID Twitch" 
                      FontSize="24"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top" 
-                     Margin="30,15,0,0"/>
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" 
+                     Margin="0"/>
 
             <Button FontFamily="Impact" 
          Name="Datos"
          Grid.Column="0"
-         Grid.Row="2" 
-         Margin="1,1,1,1"
+         Grid.Row="1" 
+         Margin="0"
          Content="Conectar Twitch"
+         HorizontalAlignment="Center"
+         VerticalAlignment="Center"
          FontSize="20" 
          Click="TwitchConnect"
-         Height="39" 
+         Height="25" 
          Width="200" 
          Background="#FF6290C3" Cursor="Hand">
                 <Button.Style>
@@ -422,8 +428,9 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="20">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="10">
+                                        <ContentPresenter  HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        </ContentPresenter>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -435,21 +442,24 @@
             <Button FontFamily="Impact" 
         x:Name="MonitorTwitch"
         Grid.Column="1" 
-        Grid.Row="2" 
-        Margin="12,9,12,9" 
-        Content="Monitor Twitch" 
-        FontSize="24" 
+        Grid.Row="1" 
+        Margin="0" 
+        Content="Monitoreo" 
+         HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        FontSize="20" 
         Click="MonitoringTwitch" 
-        Height="39" 
+        Height="25" 
         Width="200" 
         Background="#FF6290C3" Cursor="Hand">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
+                    <Style TargetType="Button">
                         <Setter Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="25">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="10">
+                                        <ContentPresenter  HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        </ContentPresenter>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -457,12 +467,56 @@
                     </Style>
                 </Button.Style>
             </Button>
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="3"
+                  Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                </Grid.RowDefinitions>
+               
+                
+                <CheckBox Grid.Column="0"
+           Grid.Row="1"
+           Name="CheckChat"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"  ></CheckBox>
+
+                <CheckBox Grid.Column="0"
+                         Grid.Row="2"
+                        Name="CheckViewers"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"></CheckBox>  
+                <TextBlock Grid.Column="1"
+                    Grid.Row="1"
+                    Text="Chat (Version Base)"
+                    FontSize="20"
+                    VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                    Foreground="White"></TextBlock>
+                <TextBlock Grid.Column="1"
+                        Grid.Row="2"
+                        Text="Viwers"
+                        FontSize="20"
+                           HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                        Foreground="White"></TextBlock>
+
+            </Grid>
+
+           
             <Border Grid.ColumnSpan="3" 
          Grid.RowSpan="5" 
-         BorderThickness="12" 
-          CornerRadius="15"
-         BorderBrush="#1A1B41"
-         Margin="-6,-6,-6,-6"
+         BorderThickness="5" 
+          CornerRadius="0,5,5,5"
+         BorderBrush="Black"
+         Margin="-1"
          ></Border>
         </Grid>
         
@@ -472,22 +526,35 @@
                        FontSize="12" 
                        TextAlignment="Center"  
                        TextWrapping="Wrap" 
-                       Foreground="#FFF7E5E5" Margin="12,12,0,12"  >
-                <Hyperlink Foreground="White" NavigateUri="https://cafecito.app/MarcosFedez" RequestNavigate="Donations">
+                       Foreground="#FFF7E5E5" Margin="10"  >
+                <Hyperlink Foreground="White" NavigateUri="https://cafecito.app/MarcosFedez" RequestNavigate="Webs">
                     Ayuda al proyecto.
             </Hyperlink>
             </TextBlock>
 
-           
+
         <Border Grid.ColumnSpan="3" 
                 Grid.RowSpan="5" 
-                BorderThickness="12" 
-                 CornerRadius="15"
-                BorderBrush="#1A1B41"
-                Margin="-6,-6,-6,-6"
+                BorderThickness="5" 
+                 CornerRadius="5"
+                BorderBrush="Black"
+                Margin="-1"
                 ></Border>
-        <TextBlock Grid.Column="3" Grid.Row="4" Text="Version 1.0.0.9" FontSize="15" Foreground="White" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom"></TextBlock>
-        
 
+        <TextBlock Grid.Column="3" 
+                       Grid.Row="4" 
+                       FontSize="12" 
+                       TextAlignment="Center"  
+                       TextWrapping="Wrap" 
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                        Margin="10">
+            <Hyperlink Foreground="#FFF7E5E5" NavigateUri="https://marcosfern1996.github.io/" RequestNavigate="Webs">
+                Version 1.0.0.18
+            </Hyperlink>
+            
+        </TextBlock>
+            
+        
     </Grid>
 </Window>

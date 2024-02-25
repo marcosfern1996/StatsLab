@@ -288,17 +288,20 @@ namespace StatsLab
             if (DataSaved.Instance.isBlockObs)
             {
                 CandadoC.Visibility = Visibility.Collapsed;
-                CandadoA.Visibility = Visibility.Collapsed;
+                CandadoA.Visibility = Visibility.Collapsed; 
+                ButtonBlock.Visibility = Visibility.Collapsed;
             }
             else if (!DataSaved.Instance.isBlockObs && blockTouch == false)
             {
                 CandadoA.Visibility = Visibility.Visible;
                 CandadoC.Visibility = Visibility.Collapsed;
+                ButtonBlock.Visibility = Visibility.Visible;
             }
             else if (!DataSaved.Instance.isBlockObs && blockTouch)
             {
                 CandadoA.Visibility = Visibility.Collapsed;
                 CandadoC.Visibility = Visibility.Visible;
+                ButtonBlock.Visibility = Visibility.Visible;
             }
             if (blockTouch == false)
             {

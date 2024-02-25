@@ -15,15 +15,18 @@ namespace StatsLab
             get { return isOpenObs; }
             set { isOpenObs = value; }
         }
-        public bool isBlockObs { get;set; }
-        public bool isBlockTwitch { get;set; }
+        public bool isBlockObs { get; set; }
+        public bool isBlockTwitch { get; set; }
+
+        public bool ChatTw { get; set; }
+        public bool Viewerstw { get; set; }
 
         public string PortOBS { get; set; }
         public string PasswordOBS { get; set; }
-        public bool isConnectedOBS {  get; set; }
-       
-        public double[] microdB {  get; set; }
-        public double sourcedB{  get; set; }
+        public bool isConnectedOBS { get; set; }
+
+        public double[] microdB { get; set; }
+        public double sourcedB { get; set; }
 
 
         public double posXObs { get; set; }
@@ -38,26 +41,28 @@ namespace StatsLab
         public string SourceNum3 { get; set; }
         public string SourceNum4 { get; set; }
         public string SourceNum5 { get; set; }
-        public string SourceNum6 { get; set; } 
+        public string SourceNum6 { get; set; }
 
         public double sourceMul0 { get; set; }
-        public double sourceMul1{  get; set; }
-        public double sourceMul2{  get; set; }
-        public double sourceMul3{  get; set; }
-        public double sourceMul4{  get; set; }
-        public double sourceMul5{  get; set; }
-        public double sourceMul6{  get; set; }
+        public double sourceMul1 { get; set; }
+        public double sourceMul2 { get; set; }
+        public double sourceMul3 { get; set; }
+        public double sourceMul4 { get; set; }
+        public double sourceMul5 { get; set; }
+        public double sourceMul6 { get; set; }
 
-        public bool sourseAct0 {  get; set; }
-        public bool sourseAct1 {  get; set; }
-        public bool sourseAct2 {  get; set; }
-        public bool sourseAct3 {  get; set; }
-        public bool sourseAct4 {  get; set; }
-        public bool sourseAct5 {  get; set; }
-        public bool sourseAct6 {  get; set; }
+        public bool sourseAct0 { get; set; }
+        public bool sourseAct1 { get; set; }
+        public bool sourseAct2 { get; set; }
+        public bool sourseAct3 { get; set; }
+        public bool sourseAct4 { get; set; }
+        public bool sourseAct5 { get; set; }
+        public bool sourseAct6 { get; set; }
 
-        public string countViewers{  get; set; }
-        public bool isTwitchConnected{  get; set; }
+        public string countViewers { get; set; }
+        public bool isTwitchConnected { get; set; }
+        public bool isClienConnected { get; set; }
+       
 
         public double posXTwitch {  get; set; }
         public double posYTwitch {  get; set; }
@@ -69,6 +74,10 @@ namespace StatsLab
         public StreamWriter writer { get; set; }
 
         public string channelName { get; set; }
+        public string messageTw{ get; set; }
+        public string userMesstw{ get; set; }
+        public string userColor{ get; set; }
+        public bool newMessage {  get; set; }
 
         private DataSaved()
         {

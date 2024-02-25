@@ -203,7 +203,7 @@ namespace StatsLab {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/StatsLab;component/statsview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/StatsLab HUB;component/statsview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\StatsView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

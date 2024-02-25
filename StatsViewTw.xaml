@@ -39,8 +39,24 @@
 
             <Button Name = "Close" Grid.Column="3" Content="X" FontSize="8" Click="ClosedButton" Width="15" Height="15" HorizontalAlignment="Right"/>
 
-            <Image Source="/Personas1.png"  Grid.Column="0" OpacityMask="#7FFFFFFF" Grid.Row="1" Grid.ColumnSpan="2" Margin="-1,0,0,1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+            <Grid Name="GridViewers"
+                Grid.ColumnSpan="2"
+                Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image Source="/Personas1.png"  Grid.Column="0" OpacityMask="#7FFFFFFF" Grid.Row="1" Grid.ColumnSpan="2" Margin="-1,0,0,1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+                <Label Name="NumViewers" Content="20" Grid.Row="1" Grid.Column="1" Background="#00522FF3" Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" />
 
+
+            </Grid>
+            
+            
             <Image Margin="5" Name="CandadoA" Source="/Candado_A.png"  Grid.Column="2" Grid.Row="1"/>
             <Image Margin="5" Name="CandadoC" Source="/candado_C.png" Grid.Column="2" Grid.Row="1"/>
             <Button Grid.Column="2" 
@@ -53,27 +69,27 @@
                      Cursor="Hand" Opacity="0.05"
                      />
 
-            <Label Name="NumViewers" Content="20" Grid.Row="1" Grid.Column="1" Background="#00522FF3" Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" />
+            
             <Ellipse Name="InDirect" 
                     Width="15" 
                      Height="15"
                      Grid.Column="0" 
                      Grid.Row="1" 
                      Fill="Red" HorizontalAlignment="Left" Margin="8,17,0,18"
-             ></Ellipse>
-            <Grid Grid.Column="0" 
+                     Visibility="Collapsed"
+             />
+            <Grid Name="GridChatTwitch" Grid.Column="0" 
                   Grid.Row="2" 
                   Grid.ColumnSpan="4" Margin="20"
                   
                   >
-
-                <WrapPanel Orientation="Vertical" Background="#19808080" 
+                <ScrollViewer Name="ScrolChat" VerticalScrollBarVisibility="Visible" PanningMode="VerticalOnly">
+                    <WrapPanel Name="ChatPanel" Orientation="Vertical" Background="Transparent" 
                                >
-                    <TextBlock  Foreground="Purple" FontSize="30" TextWrapping="Wrap" Text="Futuro chat de twitch" Height="143" Width="256"/>
-
+                   
 
                 </WrapPanel>
-
+                </ScrollViewer>
             </Grid>
         </Grid>
     </Grid>
