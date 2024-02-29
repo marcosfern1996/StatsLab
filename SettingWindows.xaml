@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:StatsLab"
         mc:Ignorable="d"
         Background="Transparent"
-         ResizeMode="NoResize"
          WindowStartupLocation="CenterScreen"
         MouseDown="DragWindow"
         Title="SettingWindows" 
@@ -15,35 +14,37 @@
         WindowStyle="None" 
         AllowsTransparency="True" >
 
-  
 
-        <Grid Margin="20" Background="#FF20365B">
-          
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80"></ColumnDefinition>
-                <ColumnDefinition Width="*"  ></ColumnDefinition>
-                <ColumnDefinition Width="*"  ></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="35"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
+
+    <Grid Margin="20" Background="#FF20365B">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"></ColumnDefinition>
+            <ColumnDefinition Width="*"  ></ColumnDefinition>
+            <ColumnDefinition Width="*"  ></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
 
         <Button Grid.Column="0" 
          Grid.Row="2"
          Margin="2"
          Name ="ShowOBS"
-         FontSize="24" Click="ShowOBS_Click"
+         FontSize="24"
+         Click="ShowOBS_Click"
          Background="Transparent"     
          BorderBrush="Transparent"
+         Opacity="0.05"
          Cursor="Hand"
          Effect = "{x:Null}"/>
         <Image Grid.Column="0" 
          Grid.Row="2"
-         Margin="2" Name="ShowOBSImg" Height="40" Source="/OBSPNG.png" Cursor="Hand" IsHitTestVisible="False" IsEnabled="False"/>
+         Margin="2" Name="ShowOBSImg" Height="40" Source="/Images/OBSPNG.png" Cursor="Hand" IsHitTestVisible="False" IsEnabled="False"/>
 
         <Button Grid.Column="0" 
       Grid.Row="3"
@@ -58,22 +59,22 @@
       />
         <Image Grid.Column="0" 
       Grid.Row="3"
-         Margin="2" Name="ShowTwitchImg" Height="50" Source="/TwitchPNG.png"  IsHitTestVisible="False" IsEnabled="False"></Image>
-        
-            
-            <Grid Name="WindowBar"
+         Margin="2" Name="ShowTwitchImg" Height="50" Source="/Images/TwitchPNG.png"  IsHitTestVisible="False" IsEnabled="False"></Image>
+
+
+        <Grid Name="WindowBar"
                   Margin="0" 
                   Grid.ColumnSpan="3" Background="Black"
                   >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"></ColumnDefinition>
-                    <ColumnDefinition Width="*"  ></ColumnDefinition>
-                    <ColumnDefinition Width="*"  ></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25"></RowDefinition>
-                </Grid.RowDefinitions>
-                        <Button Grid.Column="2" 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="*"  ></ColumnDefinition>
+                <ColumnDefinition Width="*"  ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="2" 
                  Grid.Row="0" 
                  Width="15" 
                                 Height="15"
@@ -87,22 +88,22 @@
                  Click="ClosedButton" 
                  Margin="0,8,10,0" 
                  Background="#FF6290C3" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5" Background="#FF6290C3">
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </Button.Style>
-                        </Button>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5" Background="#FF6290C3">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
 
-                <Button Grid.Column="2" 
+            <Button Grid.Column="2" 
                  Grid.Row="0" 
                  Width="15"
                         Height="15"
@@ -116,21 +117,21 @@
                  Margin="0,8,40,0" 
                  Click="MinimizedButton" 
                  Background="#FF6290C3" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Grid.Column="2" 
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Grid.Column="2" 
                  Grid.Row="0" 
                  Width="15" 
                         Height="15"
@@ -144,83 +145,94 @@
                  Margin="0,8,70,0" 
                  Click="MinimizedHiddenButton" 
                  Background="#FF6290C3" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </Grid>
-           
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
 
 
 
-            <Grid Name="OBSGrid" Grid.Column="1" 
+
+        <Grid Name="OBSGrid" Grid.Column="1" 
                Grid.ColumnSpan="2" 
                Grid.Row="1" 
                Grid.RowSpan="5"
-                  Background="Transparent">
+                  Background="Transparent" d:IsHidden="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"  ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+
+
+            <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="30,30,30,4" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"  ></ColumnDefinition>
+                    <ColumnDefinition Width= "60" />
+                    <ColumnDefinition Width= "60" />
+                    <ColumnDefinition Width= "60" />
+                    <ColumnDefinition Width= "60" />
+                    <ColumnDefinition Width= "60" />
+                    <ColumnDefinition Width= "60" />
+                    <ColumnDefinition Width= "60" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"></RowDefinition>
-                    <RowDefinition Height="40"></RowDefinition>
-                    <RowDefinition Height="40"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-            <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="30,30,30,30" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width= "60" ></ColumnDefinition>
-                    <ColumnDefinition Width= "60" ></ColumnDefinition>
-                    <ColumnDefinition Width= "60" ></ColumnDefinition>
-                    <ColumnDefinition Width= "60" ></ColumnDefinition>
-                    <ColumnDefinition Width= "60" ></ColumnDefinition>
-                    <ColumnDefinition Width= "60" ></ColumnDefinition>
-                    <ColumnDefinition Width= "60" ></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                </Grid.RowDefinitions>
-                
-                <CheckBox Name="check0" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></CheckBox>
-                <CheckBox Name="check1" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" ></CheckBox>
-                <CheckBox Name="check2" Grid.Row="0" Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></CheckBox>
-                <CheckBox Name="check3" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></CheckBox>
-                <CheckBox Name="check4" Grid.Row="0" Grid.Column="4"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></CheckBox>
-                <CheckBox Name="check5" Grid.Row="0" Grid.Column="5"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></CheckBox>
-                <CheckBox Name="check6" Grid.Row="0" Grid.Column="6"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></CheckBox>
-                
-                <TextBlock Margin="4" TextWrapping="Wrap" Name="source01"  Grid.Column="0" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
-                <TextBlock Margin="4" TextWrapping="Wrap" Name="source02"  Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></TextBlock>
-                <TextBlock Margin="4" TextWrapping="Wrap" Name="source03"  Grid.Column="2" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></TextBlock>
-                <TextBlock Margin="4" TextWrapping="Wrap" Name="source04"  Grid.Column="3" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></TextBlock>
-                <TextBlock Margin="4" TextWrapping="Wrap" Name="source05"  Grid.Column="4" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></TextBlock>
-                <TextBlock Margin="4" TextWrapping="Wrap" Name="source06"  Grid.Column="5" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></TextBlock>
-                <TextBlock Margin="4" TextWrapping="Wrap" Name="source07"  Grid.Column="6" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"></TextBlock>
-                <Border BorderBrush="Black" Grid.Column="0" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"></Border>
-                <Border BorderBrush="Black" Grid.Column="1" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"></Border>
-                <Border BorderBrush="Black" Grid.Column="2" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"></Border>
-                <Border BorderBrush="Black" Grid.Column="3" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"></Border>
-                <Border BorderBrush="Black" Grid.Column="4" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"></Border>
-                <Border BorderBrush="Black" Grid.Column="5" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"></Border>
-                <Border BorderBrush="Black" Grid.Column="6" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"></Border>
+
+                <!--  <WrapPanel Grid.Row="2"
+                    Grid.ColumnSpan="7"
+                           Grid.RowSpan="2"
+                           Background="White"
+                           Name="WrapSourses"/>
+-->
+                <CheckBox x:Name="check0" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                <CheckBox x:Name="check1" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" />
+                <CheckBox x:Name="check2" Grid.Row="0" Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                <CheckBox x:Name="check3" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                <CheckBox x:Name="check4" Grid.Row="0" Grid.Column="4"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                <CheckBox x:Name="check5" Grid.Row="0" Grid.Column="5"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                <CheckBox x:Name="check6" Grid.Row="0" Grid.Column="6"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+
+                <TextBlock Margin="4" TextWrapping="Wrap" x:Name="source01"  Grid.Column="0" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                <TextBlock Margin="4" TextWrapping="Wrap" x:Name="source02"  Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                <TextBlock Margin="4" TextWrapping="Wrap" x:Name="source03"  Grid.Column="2" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                <TextBlock Margin="4" TextWrapping="Wrap" x:Name="source04"  Grid.Column="3" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                <TextBlock Margin="4" TextWrapping="Wrap" x:Name="source05"  Grid.Column="4" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                <TextBlock Margin="4" TextWrapping="Wrap" x:Name="source06"  Grid.Column="5" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                <TextBlock Margin="4" TextWrapping="Wrap" x:Name="source07"  Grid.Column="6" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                <Border BorderBrush="Black" Grid.Column="0" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"/>
+                <Border BorderBrush="Black" Grid.Column="1" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"/>
+                <Border BorderBrush="Black" Grid.Column="2" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"/>
+                <Border BorderBrush="Black" Grid.Column="3" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"/>
+                <Border BorderBrush="Black" Grid.Column="4" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"/>
+                <Border BorderBrush="Black" Grid.Column="5" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"/>
+                <Border BorderBrush="Black" Grid.Column="6" BorderThickness="2" Grid.ColumnSpan="1" Grid.RowSpan="2"/>
             </Grid>
 
-                
-                <TextBox FontFamily="Impact" 
-                     Name="PortTXT" 
+
+            <TextBox FontFamily="Impact" 
+                     x:Name="PortTXT" 
                      Grid.Column="0" 
                      Grid.Row="1" 
                      Width="200" 
@@ -232,9 +244,10 @@
                      VerticalContentAlignment="Center" 
                      TextAlignment="Center"
                      Background="#FFC2E7DA" 
-                     BorderBrush="#FFABADB3" Text="4444"  />
+                     BorderBrush="#FFABADB3"
+                        />
 
-                <TextBlock FontFamily="Impact" 
+            <TextBlock FontFamily="Impact" 
                        Grid.Column="0" 
                        Grid.Row="0"
                            Foreground="White"
@@ -245,8 +258,8 @@
                        Margin="3" 
                        TextAlignment="Center"/>
 
-                <PasswordBox FontFamily="Impact" 
-                         Name="PasswordTXT"
+            <PasswordBox FontFamily="Impact" 
+                         x:Name="PasswordTXT"
                          Grid.Column="1" 
                          Grid.Row="1" 
                          Width="200" 
@@ -260,7 +273,7 @@
                          BorderBrush="#FFABADB3" 
                          Background="#FFC2E7DA"  />
 
-                <TextBlock FontFamily="Impact"
+            <TextBlock FontFamily="Impact"
                        Grid.Column="1" 
                            Foreground="White"
 
@@ -273,15 +286,15 @@
                        Margin="3" 
                        TextAlignment="Center"><Run Language="es-ar" Text="S"/><Run Text="erver Password"/></TextBlock>
 
-               
-                
-
-               
-
-              
 
 
-                <Button Name="Conectar" 
+
+
+
+
+
+
+            <Button x:Name="Conectar" 
                     FontFamily="Impact"
                     Grid.Column="0"
                     Grid.Row="2" 
@@ -292,23 +305,22 @@
                     Height="25"
                     Width="200" 
                     Background="#FF6290C3" Cursor="Hand">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="10">
-                                            <ContentPresenter  HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            </ContentPresenter>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="10">
+                                        <ContentPresenter  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button FontFamily="Impact" 
-             Name="Monitoreo" 
+             x:Name="Monitoreo" 
              Grid.Column="2" 
              Grid.Row="2" 
              Margin="1" 
@@ -319,17 +331,17 @@
              Width="200" 
              Background="#FF6290C3" Cursor="Hand">
                 <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="10">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="10">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
                 </Button.Style>
             </Button>
             <Border Grid.ColumnSpan="3" 
@@ -338,7 +350,7 @@
               CornerRadius="0,5,5,5"
              BorderBrush="Black"
              Margin="-1"
-             ></Border>
+             />
 
         </Grid>
 
@@ -346,7 +358,7 @@
         <Grid Name="TwitchGrid" Grid.Column="1" 
                   Grid.ColumnSpan="2" 
                   Grid.Row="1" 
-                  Grid.RowSpan="5"
+                  Grid.RowSpan="6"
                   Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -354,6 +366,10 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
                 <RowDefinition Height="40"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
@@ -399,7 +415,7 @@
                   FontSize="20" 
                   TextAlignment="Center" 
                   Background="#FFC2E7DA" 
-                     Text="marcosfedez96"/>
+                  />
 
             <TextBlock  FontFamily="Impact"
                      Grid.Row="0"
@@ -438,11 +454,37 @@
                     </Style>
                 </Button.Style>
             </Button>
+            <Button FontFamily="Impact" 
+                x:Name="Autorizar"
+                Grid.Row="1"
+                    Grid.Column="2"
+                Content="Autorización"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="20" 
+                Click="Aut"
+                Height="25" 
+                Width="200" 
+                Background="#FF6290C3" Cursor="Hand">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="10">
+                                        <ContentPresenter  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
 
             <Button FontFamily="Impact" 
         x:Name="MonitorTwitch"
         Grid.Column="1" 
-        Grid.Row="1" 
+        Grid.Row="5" 
         Margin="0" 
         Content="Monitoreo" 
          HorizontalAlignment="Center"
@@ -469,10 +511,13 @@
             </Button>
             <Grid Grid.Column="0"
                   Grid.ColumnSpan="2"
-                  Grid.Row="3"
-                  Grid.RowSpan="2">
+                  Grid.Row="2"
+                  Grid.RowSpan="5">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"></ColumnDefinition>
+                    <ColumnDefinition Width="180"></ColumnDefinition>
                     <ColumnDefinition Width="80"></ColumnDefinition>
+                    <ColumnDefinition Width="40"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -480,26 +525,43 @@
                     <RowDefinition Height="30"></RowDefinition>
                     <RowDefinition Height="30"></RowDefinition>
                 </Grid.RowDefinitions>
-               
-                
+
+
                 <CheckBox Grid.Column="0"
            Grid.Row="1"
            Name="CheckChat"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right"  ></CheckBox>
+                <TextBlock Grid.Column="1"
+                 Grid.Row="1"
+                 Text="Chat(Version Base)"
+                 FontSize="20"
+                 VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                 Foreground="White"></TextBlock>
+                <TextBlock Grid.Column="2"
+                 Grid.Row="1"
+                 Text="Fontsize"
+                 FontSize="20"
+                 VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                 Foreground="White"></TextBlock>
+
+                <TextBox Name="sizeLetter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="3" Grid.Row="1"
+                         BorderBrush="Black"
+                         BorderThickness="3"
+                         KeyDown="ChangeFonrsize"
+                         LostKeyboardFocus="ChangeFonrsize"
+                         
+                         ></TextBox>
+
 
                 <CheckBox Grid.Column="0"
                          Grid.Row="2"
                         Name="CheckViewers"
                         HorizontalAlignment="Right"
-                        VerticalAlignment="Center"></CheckBox>  
-                <TextBlock Grid.Column="1"
-                    Grid.Row="1"
-                    Text="Chat (Version Base)"
-                    FontSize="20"
-                    VerticalAlignment="Center"
-                           HorizontalAlignment="Left"
-                    Foreground="White"></TextBlock>
+                        VerticalAlignment="Center"></CheckBox>
+
                 <TextBlock Grid.Column="1"
                         Grid.Row="2"
                         Text="Viwers"
@@ -508,29 +570,68 @@
                     VerticalAlignment="Center"
                         Foreground="White"></TextBlock>
 
+
+
             </Grid>
 
-           
-            <Border Grid.ColumnSpan="3" 
-         Grid.RowSpan="5" 
+
+            <Border Grid.ColumnSpan="2" 
+         Grid.RowSpan="6" 
          BorderThickness="5" 
           CornerRadius="0,5,5,5"
          BorderBrush="Black"
-         Margin="-1"
+         Margin="-1,-1,-1,-25"
          ></Border>
         </Grid>
-        
 
-            <TextBlock Grid.Column="0" 
+
+        <Button Name="Cafesito"
+          Grid.Column="0" 
+      Grid.Row="4"
+      Margin="2"
+      FontSize="24"
+      Background="transparent"     
+      BorderBrush="transparent"
+      Cursor="Hand"
+    Click="cafe"
+      Opacity="0.05"
+             >
+
+            <!--<Hyperlink Foreground="White" NavigateUri="https://cafecito.app/MarcosFedez" RequestNavigate="Webs">
+                
+          </Hyperlink>-->
+        </Button>
+
+        <Image Source="/Images/Donaciones.png" Grid.Column="0" 
+    Grid.Row="4"   
+    IsHitTestVisible="False"
+>
+
+        </Image>
+
+
+
+        <!--<TextBlock Grid.Column="0" 
                        Grid.Row="4" 
                        FontSize="12" 
                        TextAlignment="Center"  
                        TextWrapping="Wrap" 
                        Foreground="#FFF7E5E5" Margin="10"  >
-                <Hyperlink Foreground="White" NavigateUri="https://cafecito.app/MarcosFedez" RequestNavigate="Webs">
-                    Ayuda al proyecto.
-            </Hyperlink>
-            </TextBlock>
+
+
+        </TextBlock>
+-->
+
+        <TextBlock Grid.Column="2" 
+             Grid.Row="4" 
+             FontSize="12" 
+             TextAlignment="Center"  
+             TextWrapping="Wrap" 
+         HorizontalAlignment="Right"
+         VerticalAlignment="Bottom"
+                   Effect="{x:Null}"
+             Margin="10" ><Hyperlink Foreground="#FFF7E5E5" NavigateUri="https://github.com/marcosfern1996/StatsLab/releases" RequestNavigate="Webs"><Run
+                 Text="Version 0.5.2"/></Hyperlink></TextBlock>
 
 
         <Border Grid.ColumnSpan="3" 
@@ -541,20 +642,6 @@
                 Margin="-1"
                 ></Border>
 
-        <TextBlock Grid.Column="3" 
-                       Grid.Row="4" 
-                       FontSize="12" 
-                       TextAlignment="Center"  
-                       TextWrapping="Wrap" 
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Bottom"
-                        Margin="10">
-            <Hyperlink Foreground="#FFF7E5E5" NavigateUri="https://marcosfern1996.github.io/" RequestNavigate="Webs">
-                Version 1.0.0.18
-            </Hyperlink>
-            
-        </TextBlock>
-            
-        
+
     </Grid>
 </Window>

@@ -1,31 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="StatsLab HUB.exe" version="1.0.0.18" publicKeyToken="0b138ab546e8e754" language="es-AR" processorArchitecture="msil" type="win32" />
-  <description asmv2:iconFile="Images\HUB-Blanco.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <asmv1:assemblyIdentity name="StatsLab HUB.exe" version="1.0.0.32" publicKeyToken="0b138ab546e8e754" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="Images\HUB-Blanco.ico" asmv2:publisher="Fernandez Marcos" asmv2:product="StatsLab HUB" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
     <assemblyIdentity name="StatsLab HUB" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="StatsLab HUB.exe" parameters="" />
   </entryPoint>
+  <co.v1:useManifestForTrust xmlns="urn:schemas-microsoft-com:asm.v1" />
   <trustInfo>
     <security>
       <applicationRequestMinimum>
-        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="LocalIntranet" Description="Default rights given to applications on the local intranet" Unrestricted="true" ID="Custom" SameSite="site" />
         <defaultAssemblyRequest permissionSetReference="Custom" />
       </applicationRequestMinimum>
       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
-        <!--
-          Opciones del manifiesto de Control de cuentas de usuario
-          Si quiere cambiar el nivel de Control de cuentas de usuario de Windows, reemplace el
-          nodo requestedExecutionLevel por alguno de los siguientes.
+        <!-- Opciones del manifiesto UAC
+             Si quiere cambiar el nivel del Control de cuentas de usuario de Windows reemplace el 
+             nodo requestedExecutionLevel por uno de los siguientes.
 
         <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
         <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
         <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
 
-         Si desea usar la virtualización de archivos y del Registro para la
-         compatibilidad con versiones anteriores, elimine el nodo requestedExecutionLevel.
-    -->
+            Especificar el elemento requestedExecutionLevel deshabilitará la virtualización de archivos y registros. 
+            Quite este elemento si la aplicación necesita esta virtualización para la compatibilidad
+            con versiones anteriores.
+        -->
         <requestedExecutionLevel level="asInvoker" uiAccess="false" />
       </requestedPrivileges>
     </security>
@@ -247,6 +248,30 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Obs.v4.WebSocket.dll" size="186880">
+      <assemblyIdentity name="Obs.v4.WebSocket" version="1.0.9.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>xcm40e/mu9Qu6qFosCTZ8EDBCBkVFsZV5JgIXhsO0ew=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OBS.WebSocket.NET.dll" size="77824">
+      <assemblyIdentity name="OBS.WebSocket.NET" version="4.7.2.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>YTg19391ysgevPnJN/qTPn3g7+fcjEmqGTuwZ6mS4IU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="obs-websocket-dotnet.dll" size="134656">
       <assemblyIdentity name="obs-websocket-dotnet" version="5.0.0.3" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -259,14 +284,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="StatsLab HUB.exe" size="811488">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="StatsLab HUB.exe" size="851424">
       <assemblyIdentity name="StatsLab HUB" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>nbTsojeQPy56ZvwNQ9gDJTJ/FZuxqxCxwELDJj0RJB4=</dsig:DigestValue>
+        <dsig:DigestValue>j1LwN1Vnm/88e6Kk7WMG4c7/sXcmdFxHuzMWJ+270ds=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -654,13 +679,30 @@
       <dsig:DigestValue>rVz+gvECc51MwVw+s4pBFSV2JSDJxCKckC9n26sjxfs=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="StatsLab HUB.exe.config" size="1812">
+  <file name="StatsLab HUB.exe.config" size="2053">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>4mbBBYDR5eTwT25SQ0nu3pNnrYDT0IMz7diBxcnxNf8=</dsig:DigestValue>
+      <dsig:DigestValue>3xAEOLxEjh6ks6HkkKOrkXsIT1yNyXo6+thABbccwSI=</dsig:DigestValue>
     </hash>
   </file>
-<publisherIdentity name="CN=DESKTOP-9CR3O1L\marco" issuerKeyHash="c932a804f06dff51148b71979328c0ddd46e4128" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>Y7JDHUVxGqAxLt/K52z6c78qtZWLOyieCYCtVTGPgsg=</DigestValue></Reference></SignedInfo><SignatureValue>Uyb3QlgBZBvUeZ4BR9OuyIZCwLAYXM8oDbrHfqPLDEgzD4fXNfXFH/eVsO6PG8NsoOMrzzvx/1QfJxbBm/AqeI9Mv5nraLh24zzCy5x0uaj8TaFp1L1Szy5d7fI2jflYOgR6QUGzK4KC/+/cbAVr1piCJNFhPoHKJTihN29ZV7A=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>pJaCr3JDDCLRoY7mNxf/vwAPOeANgKzzgsidp61moZP9tAMQ3ZXVkxg33LUeFKOdOoK44mZh1739DmTtTJYnm7s+wtfMzKcpJhgo8eznrvNKBurh8dODujBsW6cQDT0o4nHB/c0BgoHI4CL9v2PLeiHxjUaJ4nIMb8txX+4te50=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="c8828f3155ad80099e283b8b95b52abf73fa6ce7cadf2e31a01a71451d43b263" Description="" Url=""><as:assemblyIdentity name="StatsLab HUB.exe" version="1.0.0.18" publicKeyToken="0b138ab546e8e754" language="es-AR" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=DESKTOP-9CR3O1L\marco</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>5uQ+f23tcN7D/FIgQo3bpyZ8Gmm4Ws8m63QY6f7+BEw=</DigestValue></Reference></SignedInfo><SignatureValue>dHFBf0IbzdXxo21D2UQCA/tvi7Hq8XDdnYXLqTbhwRRn0bgckKjAxFRlLteroe0xJ8fUraPD7+cqOnHw5tPkTDuypbL8B82xX2lBTUFXDNhi6mAO69av3DubfmCapCixsVx/eNFN9m3KpQpyKj6QbyX/BI23MXmpWgwMzF+76mo=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>pJaCr3JDDCLRoY7mNxf/vwAPOeANgKzzgsidp61moZP9tAMQ3ZXVkxg33LUeFKOdOoK44mZh1739DmTtTJYnm7s+wtfMzKcpJhgo8eznrvNKBurh8dODujBsW6cQDT0o4nHB/c0BgoHI4CL9v2PLeiHxjUaJ4nIMb8txX+4te50=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB7TCCAVagAwIBAgIQFdrdHDAn8LdCiv4uDEuRJjANBgkqhkiG9w0BAQsFADA1MTMwMQYDVQQDHioARABFAFMASwBUAE8AUAAtADkAQwBSADMATwAxAEwAXABtAGEAcgBjAG8wHhcNMjQwMjEyMjAzNTUyWhcNMjUwMjEyMDIzNTUyWjA1MTMwMQYDVQQDHioARABFAFMASwBUAE8AUAAtADkAQwBSADMATwAxAEwAXABtAGEAcgBjAG8wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAKSWgq9yQwwi0aGO5jcX/78ADzngDYCs84LInaetZqGT/bQDEN2V1ZMYN9y1HhSjnTqCuOJmYde9/Q5k7UyWJ5u7PsLXzMynKSYYKPHs567zSgbq4fHTg7owbFunEA09KOJxwf3NAYKByOAi/b9jy3oh8Y1GieJyDG/LcV/uLXudAgMBAAEwDQYJKoZIhvcNAQELBQADgYEAJBcuuGiLRgI7KEQwLZD+zVuVDyxFQPIFWdTKG5h07yK4MY3WmCvZaJmj0sYceLDGkHMD+kh3xSRUFslfcwTaD5laH1SDw+7m+5EtV+md1RQvcYjl502yML6I3H25qOEhav9Unl8yO7bQuGvNtfbTO5bWdu8ENLtYR+552pMH8zg=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- Una lista de las versiones de Windows en la que se ha probado esta aplicación y
+           con la que se ha diseñado para que trabaje. Quite la marca de comentario de los elementos adecuados y Windows seleccionará 
+           automáticamente el entorno más compatible. -->
+      <!-- Windows Vista -->
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />-->
+      <!-- Windows 7 -->
+      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />-->
+      <!-- Windows 8 -->
+      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}" />-->
+      <!-- Windows 8.1 -->
+      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}" />-->
+      <!-- Windows 10 -->
+      <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
+    </application>
+  </compatibility>
+<publisherIdentity name="CN=DESKTOP-9CR3O1L\marco" issuerKeyHash="c932a804f06dff51148b71979328c0ddd46e4128" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>P6AaB7/G0kvOptM2eLjUBfgnFAPy0Sb0YsN8DLWq2fI=</DigestValue></Reference></SignedInfo><SignatureValue>UKiDU7TpREWMrYi61xtY1RgFlIrb70oiLsBcZozrwmHrqoNUDc4pI8gYaszMKh1QUVVsYeRs0h5ZePDDKcN7ddnColdLstQu18oCaHOoKAjUvsLW25IHxJphmI9vSyRqQFn6Nuz21X4I47FNqXUGiXallmFiTyVuPOymCdxKBek=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>pJaCr3JDDCLRoY7mNxf/vwAPOeANgKzzgsidp61moZP9tAMQ3ZXVkxg33LUeFKOdOoK44mZh1739DmTtTJYnm7s+wtfMzKcpJhgo8eznrvNKBurh8dODujBsW6cQDT0o4nHB/c0BgoHI4CL9v2PLeiHxjUaJ4nIMb8txX+4te50=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="f2d9aab50c7cc362f426d1f2031427f805d4b87836d3a6ce4bd2c6bf071aa03f" Description="" Url=""><as:assemblyIdentity name="StatsLab HUB.exe" version="1.0.0.32" publicKeyToken="0b138ab546e8e754" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=DESKTOP-9CR3O1L\marco</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>W745SKpVfwsyfnRZmqxWzPbVPM1hy8YhowcFzlKHd58=</DigestValue></Reference></SignedInfo><SignatureValue>VJ0wPOLpxHy0V9eWYmsi5f0Z2qzpofrNnBSNTnT8YUY4dwUdrssa1o9C0XevJbyJHqP/ySdj0pmJMZHMcVEz8eOkqScv4OWZL+d4uSNl0fDzBiA9+I92gWLBUr34Wx8fRwTLkN0038XhjOQhS+GWte4AabELuy1QHpkFIkk1yvg=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>pJaCr3JDDCLRoY7mNxf/vwAPOeANgKzzgsidp61moZP9tAMQ3ZXVkxg33LUeFKOdOoK44mZh1739DmTtTJYnm7s+wtfMzKcpJhgo8eznrvNKBurh8dODujBsW6cQDT0o4nHB/c0BgoHI4CL9v2PLeiHxjUaJ4nIMb8txX+4te50=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB7TCCAVagAwIBAgIQFdrdHDAn8LdCiv4uDEuRJjANBgkqhkiG9w0BAQsFADA1MTMwMQYDVQQDHioARABFAFMASwBUAE8AUAAtADkAQwBSADMATwAxAEwAXABtAGEAcgBjAG8wHhcNMjQwMjEyMjAzNTUyWhcNMjUwMjEyMDIzNTUyWjA1MTMwMQYDVQQDHioARABFAFMASwBUAE8AUAAtADkAQwBSADMATwAxAEwAXABtAGEAcgBjAG8wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAKSWgq9yQwwi0aGO5jcX/78ADzngDYCs84LInaetZqGT/bQDEN2V1ZMYN9y1HhSjnTqCuOJmYde9/Q5k7UyWJ5u7PsLXzMynKSYYKPHs567zSgbq4fHTg7owbFunEA09KOJxwf3NAYKByOAi/b9jy3oh8Y1GieJyDG/LcV/uLXudAgMBAAEwDQYJKoZIhvcNAQELBQADgYEAJBcuuGiLRgI7KEQwLZD+zVuVDyxFQPIFWdTKG5h07yK4MY3WmCvZaJmj0sYceLDGkHMD+kh3xSRUFslfcwTaD5laH1SDw+7m+5EtV+md1RQvcYjl502yML6I3H25qOEhav9Unl8yO7bQuGvNtfbTO5bWdu8ENLtYR+552pMH8zg=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

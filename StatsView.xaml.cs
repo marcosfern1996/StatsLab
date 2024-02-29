@@ -1,4 +1,5 @@
 ﻿using OBSWebsocketDotNet;
+using OBSWebsocketDotNet.Types.Events;
 using StatsLab.Connection_OBS;
 using System;
 using System.Windows;
@@ -16,13 +17,12 @@ namespace StatsLab
 
         OBSWebsocket ws;
         private DispatcherTimer timer;
-        Helix helix;
+       
         public bool blockTouch = false;
-        string[] nombres;
+      
         public StatsView()
         {
             InitializeComponent();
-            helix = new Helix();
             ws = new OBSWebsocket();
             ShowInTaskbar = false;
             timer = new DispatcherTimer();
@@ -33,6 +33,9 @@ namespace StatsLab
             DataSaved.Instance.LoadDocObs();
             MyWindowObs.Left = DataSaved.Instance.posXObs;
             MyWindowObs.Top = DataSaved.Instance.posYObs;
+          
+           
+
             if (DataSaved.Instance.heightObs> 10 && DataSaved.Instance.widthObs > 10)
             {
                 MyWindowObs.Height = DataSaved.Instance.heightObs;
@@ -43,6 +46,8 @@ namespace StatsLab
             Console.WriteLine("Actual Y "+ MyWindowObs.Top);
 
         }
+
+       
 
         private void rechargedTimer(object sender, EventArgs e)
         {
@@ -80,21 +85,15 @@ namespace StatsLab
         public void ExceptionOBSClose()
         {
             DataSaved.Instance.isOpenedOBS();
-            if (!DataSaved.Instance.isOpenObs && DataSaved.Instance.isConnectedOBS)
+            if (!DataSaved.Instance._isOpenObs && DataSaved.Instance.isConnectedOBS)
             {
-                this.Hide();
+                this.Close();
 
             }
 
         }
 
-        public void UpdateProgressBarMicro()
-        {
-
-
-        }
-
-      
+         
         public void UpdateSources()
         {
 
@@ -253,13 +252,13 @@ namespace StatsLab
 
         private void ClosedButton(object sender, RoutedEventArgs e)
         {
-            if (!blockTouch)
+            if (!DataSaved.Instance.blockTouchobs)
             {
-                double posX = MyWindowObs.Left;
-                double posY = MyWindowObs.Top; 
-                double winHeigh = MyWindowObs.Height;
-                double winWidth = MyWindowObs.Width;
-                DataSaved.Instance.SaveDocObs(posX, posY, winHeigh , winWidth);
+                DataSaved.Instance.posXObs = MyWindowObs.Left;
+                DataSaved.Instance.posYObs= MyWindowObs.Top;
+                DataSaved.Instance.heightObs= MyWindowObs.Height;
+                DataSaved.Instance.widthObs= MyWindowObs.Width;
+                DataSaved.Instance.SaveDocObs(DataSaved.Instance.posXObs, DataSaved.Instance.posYObs, DataSaved.Instance.heightObs, DataSaved.Instance.widthObs);
                 Console.WriteLine("SeGuardo");
                 this.Hide();
             }
@@ -268,16 +267,16 @@ namespace StatsLab
 
         private void BlockButton(object sender, RoutedEventArgs e)
         {
-            if (blockTouch)
-            { blockTouch = false; }
+            if (DataSaved.Instance.blockTouchobs)
+            { DataSaved.Instance.blockTouchobs = false; }
             else
-            { blockTouch = true; }
+            { DataSaved.Instance.blockTouchobs = true; }
 
         }
 
         private void DragWindow(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && !blockTouch)
+            if (e.LeftButton == MouseButtonState.Pressed && !DataSaved.Instance.blockTouchobs)
             {
                 this.DragMove();
             }
@@ -291,19 +290,19 @@ namespace StatsLab
                 CandadoA.Visibility = Visibility.Collapsed; 
                 ButtonBlock.Visibility = Visibility.Collapsed;
             }
-            else if (!DataSaved.Instance.isBlockObs && blockTouch == false)
+            else if (!DataSaved.Instance.isBlockObs && DataSaved.Instance.blockTouchobs == false)
             {
                 CandadoA.Visibility = Visibility.Visible;
                 CandadoC.Visibility = Visibility.Collapsed;
                 ButtonBlock.Visibility = Visibility.Visible;
             }
-            else if (!DataSaved.Instance.isBlockObs && blockTouch)
+            else if (!DataSaved.Instance.isBlockObs && DataSaved.Instance.blockTouchobs)
             {
                 CandadoA.Visibility = Visibility.Collapsed;
                 CandadoC.Visibility = Visibility.Visible;
                 ButtonBlock.Visibility = Visibility.Visible;
             }
-            if (blockTouch == false)
+            if (DataSaved.Instance.blockTouchobs == false)
             {
                 
                 MyWindowObs.ResizeMode = ResizeMode.CanResizeWithGrip;
@@ -311,7 +310,7 @@ namespace StatsLab
                 MyWindowObs.BorderBrush = Brushes.Black;
                 MyWindowObs.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#19E4E3E3"));
             }
-            else if (blockTouch == true)
+            else if (DataSaved.Instance.blockTouchobs == true)
             {
                
                 Close.Visibility = Visibility.Collapsed;

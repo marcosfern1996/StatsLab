@@ -3,25 +3,11 @@ using System;
 
 namespace StatsLab
 {
-    public class Bandera
+    public class Flag
     {       
         StatsView statsView = new StatsView() ;  
         StatsViewTw statsViewTw = new StatsViewTw() ;
 
-        public void ActualizarMicro()
-        {
-///statsView.UpdateStateMicro();           
-        }
-
-        public void ActualizarSource()
-        {
-          //  statsView.UpdateStateSource();          
-        }
-
-        public void ActualizarBarraMicro()
-        {
-           // statsView.UpdateProgressBarMicro();
-        }
 
         public void AbrirMonitoreoObs()
         {

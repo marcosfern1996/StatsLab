@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Net.Sockets;
+using System.Windows;
 
 namespace StatsLab
 {
     public class DataSaved
     {
         private static DataSaved _instance;
+
+        public bool blockTouchobs {  get; set; }
+        public bool blockTouchtwitch{  get; set; }
 
         public bool isOpenObs;
         public bool _isOpenObs
@@ -17,7 +22,8 @@ namespace StatsLab
         }
         public bool isBlockObs { get; set; }
         public bool isBlockTwitch { get; set; }
-
+        public double letterSize { get; set; }
+        
         public bool ChatTw { get; set; }
         public bool Viewerstw { get; set; }
 
@@ -25,15 +31,13 @@ namespace StatsLab
         public string PasswordOBS { get; set; }
         public bool isConnectedOBS { get; set; }
 
-        public double[] microdB { get; set; }
-        public double sourcedB { get; set; }
-
-
+      
         public double posXObs { get; set; }
         public double posYObs { get; set; }
         public double heightObs { get; set; }
         public double widthObs { get; set; }
-
+        public int[] sourcesInput {  get; set; }
+        public int[] sourcesCheck {  get; set; }
 
         public string SourceNum0 { get; set; }
         public string SourceNum1 { get; set; }
@@ -62,16 +66,13 @@ namespace StatsLab
         public string countViewers { get; set; }
         public bool isTwitchConnected { get; set; }
         public bool isClienConnected { get; set; }
-       
+       public bool isStreaming {  get; set; }
 
         public double posXTwitch {  get; set; }
         public double posYTwitch {  get; set; }
         public double heightTwitch { get; set; }
         public double widthTwitch { get; set; }
 
-        public TcpClient TwitchCtls { get; set; }
-        public StreamReader reader { get; set; }
-        public StreamWriter writer { get; set; }
 
         public string channelName { get; set; }
         public string messageTw{ get; set; }
@@ -98,7 +99,7 @@ namespace StatsLab
         
         public void isOpenedOBS()
         {
-            isOpenObs = IsProcessRunning("obs64");
+            _isOpenObs = IsProcessRunning("obs64");
            
         }
 
@@ -108,22 +109,55 @@ namespace StatsLab
             return processes.Length > 0;
         }
 
+        public void SaveUserData(string channelName, string portOBS, double fontSize)
+        {
+            string carpetaProyecto = AppDomain.CurrentDomain.BaseDirectory;
+            string rutaArchivo = carpetaProyecto + "UserData.txt";
+
+            try
+            {
+                using(StreamWriter userData = new StreamWriter(rutaArchivo))
+                {
+                    userData.WriteLine(channelName);
+                    userData.WriteLine(portOBS);
+                    userData.WriteLine(fontSize);
+                }
+            }catch(Exception ex)
+            {
+
+            }
+        } 
+        public void LoadUserData()
+        {
+            string carpetaProyecto = AppDomain.CurrentDomain.BaseDirectory;
+            string rutaArchivo = Path.Combine(carpetaProyecto, "UserData.txt");
+            try
+            {
+                using(StreamReader lector = new StreamReader(rutaArchivo))
+                {
+                    channelName = lector.ReadLine();
+                    PortOBS = lector.ReadLine();
+                    letterSize = double.Parse(lector.ReadLine());
+                }
+            }
+            catch
+            {
+
+            }
+        }
 
         public void SaveDocTwitch(double posX ,double posY , double windheigh, double windwidth)
         {
-            // Variables que deseas guardar
-
-            // Ruta del archivo de texto
             string carpetaProyecto = AppDomain.CurrentDomain.BaseDirectory;
             string rutaArchivo = carpetaProyecto + "TwitchData.txt";
 
-            // Escribir en el archivo de texto
+           
             try
             {
-                // Abre el archivo en modo de escritura o lo crea si no existe
+              
                 using (StreamWriter siteTwichWIndow = new StreamWriter(rutaArchivo))
                 {
-                    // Escribe las variables en el archivo
+                  
                     siteTwichWIndow.WriteLine($"{posX}");
                     siteTwichWIndow.WriteLine($"{posY}");
                     siteTwichWIndow.WriteLine($"{windheigh}");
@@ -137,23 +171,21 @@ namespace StatsLab
                 Console.WriteLine($"Error al guardar en el archivo: {ex.Message}");
             }
         }
+
         public void LoadDocTwitch()
         {
-            // Variables para almacenar los datos cargados
-          
-            // Obtiene la carpeta base del dominio de aplicación
+            
             string carpetaProyecto = AppDomain.CurrentDomain.BaseDirectory;
 
-            // Ruta del archivo de texto en la ubicación del proyecto
             string rutaArchivo = Path.Combine(carpetaProyecto, "TwitchData.txt");
 
-            // Leer desde el archivo de texto
+         
             try
             {
-                // Abre el archivo en modo de lectura
+              
                 using (StreamReader lector = new StreamReader(rutaArchivo))
                 {
-                    // Lee los datos desde el archivo
+                 
                    
                     posXTwitch = double.Parse(lector.ReadLine());
                     posYTwitch = double.Parse(lector.ReadLine());
@@ -161,7 +193,7 @@ namespace StatsLab
                     widthTwitch= double.Parse(lector.ReadLine());
                 }
 
-                // Muestra los datos cargados
+              
                 Console.WriteLine($"posicion X: {posXTwitch}");
                 Console.WriteLine($"posicion Y: {posYTwitch}");
             }
@@ -173,19 +205,17 @@ namespace StatsLab
         
         public void SaveDocObs(double posX ,double posY, double windheigh, double windwidth)
         {
-            // Variables que deseas guardar
-
-            // Ruta del archivo de texto
+           
             string carpetaProyecto = AppDomain.CurrentDomain.BaseDirectory;
             string rutaArchivo = carpetaProyecto + "ObsData.txt";
 
-            // Escribir en el archivo de texto
+         
             try
             {
-                // Abre el archivo en modo de escritura o lo crea si no existe
+               
                 using (StreamWriter siteTwichWIndow = new StreamWriter(rutaArchivo))
                 {
-                    // Escribe las variables en el archivo
+
                     siteTwichWIndow.WriteLine($"{posX}");
                     siteTwichWIndow.WriteLine($"{posY}");
                     siteTwichWIndow.WriteLine($"{windheigh}");
@@ -204,29 +234,25 @@ namespace StatsLab
         public void LoadDocObs()
         {
 
-            // Variables para almacenar los datos cargados
-          
-            // Obtiene la carpeta base del dominio de aplicación
+        
             string carpetaProyecto = AppDomain.CurrentDomain.BaseDirectory;
 
-            // Ruta del archivo de texto en la ubicación del proyecto
+         
             string rutaArchivo = Path.Combine(carpetaProyecto, "ObsData.txt");
 
-            // Leer desde el archivo de texto
+          
             try
             {
-                // Abre el archivo en modo de lectura
                 using (StreamReader lector = new StreamReader(rutaArchivo))
                 {
-                    // Lee los datos desde el archivo
-
+                  
                     posXObs = double.Parse(lector.ReadLine());
                     posYObs = double.Parse(lector.ReadLine());
                     heightObs = double.Parse(lector.ReadLine());
                     widthObs = double.Parse(lector.ReadLine());
                 }
 
-                // Muestra los datos cargados
+             
                 Console.WriteLine($"posicion X: {posXObs}");
                 Console.WriteLine($"posicion Y: {posYObs}");
             }

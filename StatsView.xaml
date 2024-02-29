@@ -11,7 +11,7 @@
         BorderThickness="2"
         mc:Ignorable="d"
         Title="StatsView"
-        Height="70" 
+        Height="50" 
         Width="210" 
         AllowsTransparency="True" 
         WindowStyle="None"
@@ -24,41 +24,42 @@
 
 
 
-        <Grid>
+        <Grid Grid.ColumnSpan="3" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width= "*" ></ColumnDefinition>
-                <ColumnDefinition Width= "*" ></ColumnDefinition>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
               <!--  <RowDefinition Height="90"></RowDefinition>-->
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
-
-
+            
+            
             <Button Name = "Close"
-                    Grid.Column="1" 
-                    Grid.ColumnSpan="6"
+                    Grid.Column="2" 
                     Content="X" 
                     FontSize="8" 
                     Click="ClosedButton" 
                     Height="15" 
                     Width="15" 
-                    HorizontalAlignment="Right"/>
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"/>
            
 
             <Image Name="CandadoA" 
                    Grid.Column="1"
                    Source="/Candado_A.png" 
-                   VerticalAlignment="Center" 
+                   VerticalAlignment="Top" 
                    HorizontalAlignment="Center" 
-                   d:LayoutOverrides="Width"/>
+                   d:LayoutOverrides="Width"
+                  />
 
             <Image Name="CandadoC" 
                    Grid.Column="1"
                     Source="/candado_C.png" 
-                   VerticalAlignment="Center" 
+                   VerticalAlignment="Top" 
                     HorizontalAlignment="Center" 
                    d:LayoutOverrides="Width"/>
                 
@@ -143,31 +144,31 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
                     <!-- <RowDefinition Height="90"></RowDefinition>-->
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
 
-                <Image Name="MuteSource0" Grid.Column="0" Grid.Row="1" Margin="3" Source="/aux_off.png"/>
-                <Image Name="UnMuteSource0" Grid.Column="0" Grid.Row="1" Margin="3" Source="/aux_on.png"/>
+                <Image Name="MuteSource0" Grid.Column="0" Grid.Row="1" Margin="3" Source="/Images/aux_off.png"/>
+                <Image Name="UnMuteSource0" Grid.Column="0" Grid.Row="1" Margin="3" Source="/Images/aux_on.png"/>
 
-                <Image Name="MuteSource1" Grid.Column="1" Grid.Row="1" Margin="3" Source="/aux_off.png"/>
-                <Image Name="UnMuteSource1" Grid.Column="1" Grid.Row="1" Margin="3" Source="/aux_on.png"/>
+                <Image Name="MuteSource1" Grid.Column="1" Grid.Row="1" Margin="3" Source="/Images/aux_off.png"/>
+                <Image Name="UnMuteSource1" Grid.Column="1" Grid.Row="1" Margin="3" Source="/Images/aux_on.png"/>
 
-                <Image Name="MuteSource2" Grid.Column="2" Grid.Row="1" Margin="3" Source="/aux_off.png"/>
-                <Image Name="UnMuteSource2" Grid.Column="2" Grid.Row="1" Margin="3" Source="/aux_on.png"/>
+                <Image Name="MuteSource2" Grid.Column="2" Grid.Row="1" Margin="3" Source="/Images/aux_off.png"/>
+                <Image Name="UnMuteSource2" Grid.Column="2" Grid.Row="1" Margin="3" Source="/Images/aux_on.png"/>
 
-                <Image Name="MuteSource3" Grid.Column="3" Grid.Row="1" Margin="3" Source="/aux_off.png"/>
-                <Image Name="UnMuteSource3" Grid.Column="3" Grid.Row="1" Margin="3" Source="/aux_on.png"/>
+                <Image Name="MuteSource3" Grid.Column="3" Grid.Row="1" Margin="3" Source="/Images/aux_off.png"/>
+                <Image Name="UnMuteSource3" Grid.Column="3" Grid.Row="1" Margin="3" Source="/Images/aux_on.png"/>
 
-                <Image Name="MuteSource4" Grid.Column="4" Grid.Row="1" Margin="3" Source="/aux_off.png"/>
-                <Image Name="UnMuteSource4" Grid.Column="4" Grid.Row="1" Margin="3" Source="/aux_on.png"/>
+                <Image Name="MuteSource4" Grid.Column="4" Grid.Row="1" Margin="3" Source="/Images/aux_off.png"/>
+                <Image Name="UnMuteSource4" Grid.Column="4" Grid.Row="1" Margin="3" Source="/Images/aux_on.png"/>
 
-                <Image Name="MuteSource5" Grid.Column="5" Grid.Row="1" Margin="3" Source="/aux_off.png"/>
-                <Image Name="UnMuteSource5" Grid.Column="5" Grid.Row="1" Margin="3" Source="/aux_on.png"/>
+                <Image Name="MuteSource5" Grid.Column="5" Grid.Row="1" Margin="3" Source="/Images/aux_off.png"/>
+                <Image Name="UnMuteSource5" Grid.Column="5" Grid.Row="1" Margin="3" Source="/Images/aux_on.png"/>
 
-                <Image Name="MuteSource6" Grid.Column="6" Grid.Row="1" Margin="3" Source="/aux_off.png"/>
-                <Image Name="UnMuteSource6" Grid.Column="6" Grid.Row="1" Margin="3" Source="/aux_on.png"/>
+                <Image Name="MuteSource6" Grid.Column="6" Grid.Row="1" Margin="3" Source="/Images/aux_off.png"/>
+                <Image Name="UnMuteSource6" Grid.Column="6" Grid.Row="1" Margin="3" Source="/Images/aux_on.png"/>
             </Grid>
 
 

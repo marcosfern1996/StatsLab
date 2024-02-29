@@ -1,19 +1,38 @@
 ﻿using OBSWebsocketDotNet.Types;
 using StatsLab.Connection_OBS;
-using StatsLab.Connection_Twitch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Channels;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Threading;
+using TwitchLib.Api;
+using TwitchLib.PubSub.Models.Responses.Messages.AutomodCaughtMessage;
+using WebSocket4Net.Command;
 
 namespace StatsLab
 {
+    public enum ChatTypes
+    {
+        KapChat = 0,
+        TwitchPopout = 1,
+        CustomURL = 2,
+        jChat = 3
+    }
 
     public partial class SettingWindows : Window
     {
+        TwitchAPI api = new TwitchAPI();
+        List<string> scopes = new List<string>{ "chat:read", "user:read:chat",
+                    "channel:read:subscriptions","channel:read:stream_key","channel:read:editors",
+                    "user:read:follows", "channel:manage:polls"};
+        string host = "https://marcosfern1996.github.io/";
+
+        private bool isButtonPressed = false;
+
         private const int WM_USER = 0x0400;
         private const int WM_MAXIMIZE_WINDOW = WM_USER + 1;
 
@@ -26,19 +45,25 @@ namespace StatsLab
         System.Drawing.Icon icon = new System.Drawing.Icon("Images/HUB-Blanco.ico");
         
         
-        TwitchConnection _twitchConnection;
-
+        
        
-        Bandera bandera; 
+        Flag flag; 
         public string portTxt, passwordTxt, micro, souseAudio1;
         public int a = 1;
 
 
         public SettingWindows()
         {
+            api.Settings.ClientId = "30y1o0f4aisqenvpgnm3duwa8q77cl";
+
+            api.Settings.Secret = "z74luhth5mt9q2186fgebmc5rcqtsi";
+
+            api.Settings.AccessToken = api.Settings.Secret;
+
+
             notifyIcon = new NotifyIcon();
-            bandera = new Bandera();
-            _twitchConnection = new TwitchConnection(); 
+            flag = new Flag();
+          
             InitializeComponent(); 
             OBSGrid.Visibility = Visibility.Visible;
             ShowOBSImg.Width = 60;
@@ -53,7 +78,7 @@ namespace StatsLab
 
 
             notifyIcon = new NotifyIcon();
-            notifyIcon.Icon = icon; // Reemplaza "tuIcono.ico" con la ruta a tu archivo de icono
+            notifyIcon.Icon = icon;
             notifyIcon.Visible = true;
             notifyIcon.DoubleClick += (sender, e) => ShowMainWindow();
 
@@ -65,13 +90,26 @@ namespace StatsLab
             notifyIcon.ContextMenuStrip.Items.Add("Cerrar Aplicacion", null, ClosedButton );
             App.Current.Exit += OnAppExit;
 
+          
+           
+            DataSaved.Instance.LoadUserData();
+
+           
+            ChanelName.Text= DataSaved.Instance.channelName;
+            sizeLetter.Text = DataSaved.Instance.letterSize.ToString();
+            PortTXT.Text = DataSaved.Instance.PortOBS;
+            if (DataSaved.Instance.letterSize == 0)
+            {
+                DataSaved.Instance.letterSize = 20;
+                 sizeLetter.Text = DataSaved.Instance.letterSize.ToString();
+            }
 
         }
 
 
         private void OnAppExit(object sender, ExitEventArgs e)
         {
-            // Limpia el NotifyIcon al cerrar la aplicación
+           
             notifyIcon.Dispose();
         }
 
@@ -131,24 +169,41 @@ namespace StatsLab
             else
             {
                 DataSaved.Instance.channelName = ChanelName.Text;
-                mainViewModel = new MainViewModel();
+               mainViewModel = new MainViewModel();
                 this.DataContext = mainViewModel;
-                
-                //Program.Main(new string[] { ChanelName.Text, "" });
-              // _twitchConnection.ConnectTwitch();
-
+          
             }
 
+        }
+        private void ChangeFonrsize(object sender , System.Windows.Input.KeyEventArgs e)
+
+        {
+            if (e.Key == Key.Enter)
+            {
+                DataSaved.Instance.letterSize = double.Parse(sizeLetter.Text);
+            }
+            
+        }
+        
+        private void ChangeFonrsize(object sender , KeyboardFocusChangedEventArgs e)
+        {
+           
+                DataSaved.Instance.letterSize = double.Parse(sizeLetter.Text);
+           
+            
         }
 
         private void ClosedButton(object sender, RoutedEventArgs e)
         {
             notifyIcon.Dispose();
+            DataSaved.Instance.SaveUserData(DataSaved.Instance.channelName,DataSaved.Instance.PortOBS ,DataSaved.Instance.letterSize);
             System.Windows.Application.Current.Shutdown();
         }
         private void ClosedButton(object sender, EventArgs e)
         {
-            notifyIcon.Dispose();
+            notifyIcon.Dispose(); 
+            DataSaved.Instance.SaveUserData(DataSaved.Instance.channelName, DataSaved.Instance.PortOBS, DataSaved.Instance.letterSize);
+
             System.Windows.Application.Current.Shutdown();
             
         }
@@ -157,6 +212,8 @@ namespace StatsLab
         {
             DataSaved.Instance.isBlockTwitch = true;
             DataSaved.Instance.isBlockObs = true;
+            DataSaved.Instance.blockTouchtwitch = true;
+            DataSaved.Instance.blockTouchobs=true;
             this.WindowState = WindowState.Minimized;
 
             if (this.WindowState == WindowState.Minimized)
@@ -175,14 +232,14 @@ namespace StatsLab
 
         private void ShouMainWindow(object sender, EventArgs args)
         {
+           
             ShowMainWindow();
         }
         private void ShowMainWindow()
         {
             this.Topmost = true;
             DataSaved.Instance.isBlockTwitch= false;
-            DataSaved.Instance.isBlockObs= false;
-            // Restaura o muestra la ventana principal
+            DataSaved.Instance.isBlockObs= false; 
             this.Show();
             this.WindowState = WindowState.Normal;
             this.Topmost = false;
@@ -200,23 +257,89 @@ namespace StatsLab
             Conectar.Content = "Conectar OBS";
             DataSaved.Instance.isOpenedOBS();
             OBSConnector.Instance.Connect(DataSaved.Instance.PortOBS, DataSaved.Instance.PasswordOBS);
-             
+            // WantImput();
+            isButtonPressed = true;
 
-            if (DataSaved.Instance.isOpenObs && DataSaved.Instance.isConnectedOBS)
+            if (DataSaved.Instance._isOpenObs && DataSaved.Instance.isConnectedOBS)
            {
                 Conectar.Content = "Refrescar";
                
 
             }
-           else if (!DataSaved.Instance.isOpenObs && !DataSaved.Instance.isConnectedOBS)
+           else if (!DataSaved.Instance._isOpenObs && !DataSaved.Instance.isConnectedOBS)
            {
                 System.Windows.MessageBox.Show("Abra OBS antes de continuar");
                Conectar.Content = "Conectar OBS";
            }
            
         }
+        // i need to think how make to want any sourses and show it here, but i need to acces to this input.
+        /*
+        void  WantImput()
+        {
+            if (isButtonPressed)
+            {
 
-        
+                List<InputBasicInfo> sceneItems = OBSConnector.Instance.obs.GetInputList();
+
+                var filteredSources = sceneItems
+                 .Where(item => item.InputName == "" || item.InputKind == "wasapi_output_capture" || item.InputKind == "wasapi_input_capture" || item.InputKind == "ffmpeg_source")
+                 .OrderBy(item => item.InputName)
+                 .ToArray();
+
+           
+
+                sourcesNames = filteredSources.Select(item => item.InputName.ToString()).ToArray();
+
+                for (int i = 0; i < sourcesNames.Length; i++)
+                {
+                    WrapPanel wrapPanel = new WrapPanel()
+                    {
+                        Margin = new Thickness(2),
+                        Orientation = System.Windows.Controls.Orientation.Vertical,
+                        VerticalAlignment = VerticalAlignment.Center,
+                    };
+                    WrapSourses.Children.Add(wrapPanel);
+                  
+                    TextBlock sourse = new TextBlock()
+                    {
+                        Text = sourcesNames[i].ToString(),
+                        
+                    };
+                    
+                    System.Windows.Controls.CheckBox checkSourse = new System.Windows.Controls.CheckBox()
+                    {
+
+                    };
+
+                    DataSaved.Instance.sourcesInput[i] = i;
+                    DataSaved.Instance.sourcesCheck[i] = i;
+
+                    wrapPanel.Children.Add(checkSourse);
+                    wrapPanel.Children.Add(sourse);
+                };
+
+                for (int i = 0; i < sourcesNames.Length; i++)
+                {
+                    if (i == 0 && sourcesNames[i] != null)
+                    {
+                        DataSaved.Instance.sourcesInput[i] = i;
+                    }
+                }
+                    isButtonPressed = false;
+            }
+
+
+        }
+        */
+
+        public void Aut(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo($"https://id.twitch.tv/oauth2/authorize?response_type=code&client_id={api.Settings.ClientId}&redirect_uri={host}&scope={String.Join("+", scopes)}"));
+           var authUrl = $"https://id.twitch.tv/oauth2/authorize?response_type=code&client_id={api.Settings.ClientId}&redirect_uri={host}&scope={String.Join("+", scopes)}";
+            Console.WriteLine(authUrl);
+
+        }
         void getNameImput()
         {
             try
@@ -236,7 +359,13 @@ namespace StatsLab
                     Console.WriteLine("lista de inputs " + filteredSources);
                     a++;
                 }
+
                 sourcesNames = filteredSources.Select(item => item.InputName.ToString()).ToArray();
+
+      
+
+                
+
                 for (int i = 0; i < sourcesNames.Length; i++)
                 {
                     if (i == 0 && sourcesNames[0] != null)
@@ -394,7 +523,7 @@ namespace StatsLab
         
         private void MonitoringTwitch(object sender, RoutedEventArgs e)
         {
-            bandera.AbrirMonitoreoTwitch();
+            flag.AbrirMonitoreoTwitch();
         }
 
         private void listBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -427,23 +556,27 @@ namespace StatsLab
         private void Monitoring(object sender, RoutedEventArgs e)
         {
             DataSaved.Instance.isOpenedOBS();
-            if (DataSaved.Instance.isOpenObs && DataSaved.Instance.isConnectedOBS)
+            if (DataSaved.Instance._isOpenObs && DataSaved.Instance.isConnectedOBS)
             {
-                bandera.ActualizarMicro();
-                bandera.ActualizarSource();
-                bandera.AbrirMonitoreoObs();
+               
+                flag.AbrirMonitoreoObs();
 
                
             }
-            if(!DataSaved.Instance.isOpenObs)
+            if(!DataSaved.Instance._isOpenObs)
             {
                 System.Windows.MessageBox.Show("Abra OBS antes de continuar");
             }
-            if (!DataSaved.Instance.isConnectedOBS && DataSaved.Instance.isOpenObs)
+            if (!DataSaved.Instance.isConnectedOBS && DataSaved.Instance._isOpenObs)
             {
                 System.Windows.MessageBox.Show("Faltan datos de obs");
             }
 
+
+        }
+
+        private void Datos_Copiar_Click(object sender, RoutedEventArgs e)
+        {
 
         }
 
@@ -459,7 +592,14 @@ namespace StatsLab
         {
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true; 
-        } 
+        }
+
+       private void cafe(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://cafecito.app/MarcosFedez"));
+            e.Handled = true; 
+        }
+       
        
     }
 }

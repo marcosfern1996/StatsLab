@@ -1,7 +1,14 @@
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\runtimes\win-x86\native\WebView2Loader.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\runtimes\win-x64\native\WebView2Loader.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\runtimes\win-arm64\native\WebView2Loader.dll
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\Images\HUB-Blanco.ico
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\StatsLab HUB.exe.config
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\StatsLab HUB.exe.manifest
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\StatsLab HUB.application
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\StatsLab HUB.exe
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\StatsLab HUB.pdb
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\Hardcodet.NotifyIcon.Wpf.dll
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\IrcDotNet.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\LiveCharts.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\LiveCharts.Wpf.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\MaterialDesignColors.dll
@@ -18,9 +25,12 @@ D:\C# Proyects\StatsLab\StatsLab\bin\Release\Microsoft.Web.WebView2.Wpf.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\Microsoft.Xaml.Behaviors.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\Newtonsoft.Json.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\obs-websocket-dotnet.dll
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\Obs.v4.WebSocket.dll
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\OBS.WebSocket.NET.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\SuperSocket.ClientEngine.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Buffers.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Diagnostics.DiagnosticSource.dll
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Drawing.Common.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Memory.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Numerics.Vectors.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Reactive.dll
@@ -37,7 +47,9 @@ D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Api.Core.Models.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Api.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Api.Helix.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Api.Helix.Models.dll
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Client.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Client.Enums.dll
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Client.Models.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Communication.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.EventSub.Core.dll
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.EventSub.Websockets.dll
@@ -66,6 +78,8 @@ D:\C# Proyects\StatsLab\StatsLab\bin\Release\Newtonsoft.Json.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\obs-websocket-dotnet.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Buffers.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Diagnostics.DiagnosticSource.xml
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Drawing.Common.pdb
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Drawing.Common.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Memory.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Numerics.Vectors.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Reactive.xml
@@ -82,7 +96,9 @@ D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Api.Core.Interfaces.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Api.Core.Models.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Api.Helix.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Api.Helix.Models.xml
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Client.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Client.Enums.xml
+D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Client.Models.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.EventSub.Core.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.EventSub.Websockets.xml
 D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.PubSub.xml
@@ -94,33 +110,20 @@ D:\C# Proyects\StatsLab\StatsLab\obj\Release\SettingWindows.g.cs
 D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsView.g.cs
 D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsViewTw.g.cs
 D:\C# Proyects\StatsLab\StatsLab\obj\Release\App.g.cs
+D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab HUB_Content.g.cs
+D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab HUB_MarkupCompile.cache
+D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab HUB_MarkupCompile.lref
 D:\C# Proyects\StatsLab\StatsLab\obj\Release\App.baml
 D:\C# Proyects\StatsLab\StatsLab\obj\Release\MainWindow.baml
 D:\C# Proyects\StatsLab\StatsLab\obj\Release\SettingWindows.baml
 D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsViewTw.baml
+D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab HUB.g.resources
 D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab.Properties.Resources.resources
 D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab.csproj.GenerateResource.cache
 D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab.csproj.CoreCompileInputs.cache
-D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab.csproj.CopyComplete
-D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Drawing.Common.dll
-D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Drawing.Common.pdb
-D:\C# Proyects\StatsLab\StatsLab\bin\Release\System.Drawing.Common.xml
-D:\C# Proyects\StatsLab\StatsLab\bin\Release\Images\HUB-Blanco.ico
-D:\C# Proyects\StatsLab\StatsLab\bin\Release\StatsLab HUB.exe.config
-D:\C# Proyects\StatsLab\StatsLab\bin\Release\StatsLab HUB.exe.manifest
-D:\C# Proyects\StatsLab\StatsLab\bin\Release\StatsLab HUB.application
-D:\C# Proyects\StatsLab\StatsLab\bin\Release\StatsLab HUB.exe
-D:\C# Proyects\StatsLab\StatsLab\bin\Release\StatsLab HUB.pdb
-D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab HUB_Content.g.cs
-D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab HUB_MarkupCompile.cache
-D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab HUB_MarkupCompile.lref
-D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab HUB.g.resources
+D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab HUB.TrustInfo.xml
 D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab HUB.exe.manifest
 D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab HUB.application
+D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab.csproj.CopyComplete
 D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab HUB.exe
 D:\C# Proyects\StatsLab\StatsLab\obj\Release\StatsLab HUB.pdb
-D:\C# Proyects\StatsLab\StatsLab\bin\Release\IrcDotNet.dll
-D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Client.Models.dll
-D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Client.Models.xml
-D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Client.dll
-D:\C# Proyects\StatsLab\StatsLab\bin\Release\TwitchLib.Client.xml

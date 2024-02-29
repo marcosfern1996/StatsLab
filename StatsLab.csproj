@@ -17,25 +17,22 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\C# Proyects\StatsLab HUB Setup\</PublishUrl>
+    <PublishUrl>D:\C# Proyects\StatsLab HUB\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Background</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>https://marcosfern1996.github.io/</UpdateUrl>
-    <TargetCulture>es-AR</TargetCulture>
     <ProductName>StatsLab HUB</ProductName>
     <PublisherName>Fernandez Marcos</PublisherName>
     <MinimumRequiredVersion>1.0.0.9</MinimumRequiredVersion>
-    <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>18</ApplicationRevision>
+    <ApplicationRevision>33</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
+    <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -80,8 +77,16 @@
   <PropertyGroup>
     <StartupObject>StatsLab.App</StartupObject>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Hardcodet.NotifyIcon.Wpf, Version=1.1.0.0, Culture=neutral, PublicKeyToken=682384a853a08aad, processorArchitecture=MSIL">
@@ -142,6 +147,12 @@
     </Reference>
     <Reference Include="obs-websocket-dotnet, Version=5.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\obs-websocket-dotnet.5.0.0.3\lib\netstandard2.0\obs-websocket-dotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Obs.v4.WebSocket, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Obs.v4.WebSocket.1.0.9\lib\netstandard2.0\Obs.v4.WebSocket.dll</HintPath>
+    </Reference>
+    <Reference Include="OBS.WebSocket.NET, Version=4.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBS.WebSocket.NET.4.7.2\lib\netstandard2.0\OBS.WebSocket.NET.dll</HintPath>
     </Reference>
     <Reference Include="SuperSocket.ClientEngine, Version=0.10.0.0, Culture=neutral, PublicKeyToken=ee9af13f57f00acc, processorArchitecture=MSIL">
       <HintPath>..\packages\SuperSocket.ClientEngine.Core.0.10.0\lib\net45\SuperSocket.ClientEngine.dll</HintPath>
@@ -386,7 +397,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Bandera.cs" />
+    <Compile Include="Flag.cs" />
     <Compile Include="Connection OBS\OBSConnector.cs" />
     <Compile Include="DataSaved.cs" />
     <Compile Include="SettingWindows.xaml.cs">
@@ -406,7 +417,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Connection Twitch\TwitchConnection.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -443,6 +453,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -453,40 +464,32 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="mute.png" />
+    <Resource Include="Images\mute.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\mic_on.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Chat\" />
+    <Resource Include="Images\mic_off.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Person.png" />
+    <Resource Include="Images\aux_off.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="mic_on.png" />
+    <Resource Include="Images\aux_on.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="mic_off.png" />
+    <Resource Include="Images\Candado_A.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="aux_off.png" />
+    <Resource Include="Images\candado_C.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="aux_on.png" />
+    <Resource Include="Images\HUBLogo.ico.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Candado_A.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="candado_C.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Personas.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="HUBLogo.ico.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Personas1.png" />
+    <Resource Include="Images\Personas1.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -501,10 +504,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="OBSPNG.png" />
+    <Resource Include="Images\OBSPNG.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="TwitchPNG.png" />
+    <Resource Include="Images\TwitchPNG.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\HUB-Blanco.ico">
@@ -542,6 +545,9 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Donaciones.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Web.WebView2.1.0.2210.55\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.2210.55\build\Microsoft.Web.WebView2.targets')" />

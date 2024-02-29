@@ -1,10 +1,8 @@
-﻿using Newtonsoft.Json;
-using OBSWebsocketDotNet;
+﻿using OBSWebsocketDotNet;
 using StatsLab.Connection_OBS;
-using StatsLab.Connection_Twitch;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,22 +14,22 @@ using TwitchLib.Api.Helix;
 using TwitchLib.Client;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Models;
-using TwitchLib.PubSub;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Events;
 using TwitchLib.Communication.Models;
+using TwitchLib.PubSub;
 using TwitchLib.PubSub.Events;
-using System.Runtime.InteropServices;
-using TwitchLib.Communication.Interfaces;
+using TwitchLib.PubSub.Models.Responses.Messages.AutomodCaughtMessage;
 
 namespace StatsLab
-{
+{ 
+
     public class MainViewModel : INotifyPropertyChanged
     {
         public MainViewModel()
         {
 
-            Config cfg = new Config(DataSaved.Instance.channelName, "oauth:49pdvza2g1mkc4mnyp18wu81g3f6iv");
+            Config cfg = new Config(DataSaved.Instance.channelName, "oauth:d0qz61r8j8fiztw6f06ujg1stvma3u");
             MyTwitchApi api = new MyTwitchApi(cfg);
             api.Connect();
 
@@ -54,21 +52,20 @@ namespace StatsLab
         TwitchClient _client = new TwitchClient();
         JoinedChannel _channel;
         StatsViewTw stats;
-        Helix helix;
-      //  TwitchPubSub _pubSub= new TwitchPubSub();
-
+       
         internal MyTwitchApi(Config cfg)
         {
             this.cfg = cfg;
 
         }
 
-        internal void Connect()
+        internal async void Connect()
         {
             if (cfg != null)
             {
-
+               
                 ConnectionCredentials credentials = new ConnectionCredentials(cfg.GetName(), cfg.GetToken());
+               
                 var clientOptions = new ClientOptions
                 {
                     MessagesAllowedInPeriod = 700,
@@ -80,54 +77,18 @@ namespace StatsLab
                 _client.Initialize(credentials, DataSaved.Instance.channelName);
                 _client.Connect();
 
-               
-
+                _channel = new JoinedChannel(DataSaved.Instance.channelName);
 
                 _client.OnConnected += OnConectedClient;
                 _client.OnDisconnected += OndisConectedClient;
                 _client.OnMessageReceived += MessageReceived;
-                
-
-               // _pubSub = new TwitchPubSub();
-              //  _pubSub.OnPubSubServiceConnected += onPubSubServiceConnected;
-               // _pubSub.OnListenResponse += onListenResponse;
-               // _pubSub.OnStreamUp += StartStream;
-                //_pubSub.OnStreamDown += OutStream;
                
-                
-
-
-              //  _pubSub.ListenToFollows(DataSaved.Instance.channelName);
-
-               // _pubSub.Connect();
+             
                 // var userLogins = new System.Collections.Generic.List<string> { DataSaved.Instance.channelName };
 
             }
         }
 
-        
-
-        private void onListenResponse(object sender, OnListenResponseArgs e)
-        {
-            if (!e.Successful)
-                throw new Exception($"Failed to listen! Response: {e.Response}");
-        }
-        private void onPubSubServiceConnected(object sender, EventArgs e)
-        {
-            // SendTopics accepts an oauth optionally, which is necessary for some topics
-            //_pubSub.SendTopics();
-        }
-        private void OutStream(object sender, OnStreamDownArgs e)
-        {
-            Console.WriteLine("ya no estoy en directo");
-            DataSaved.Instance.isTwitchConnected = true;
-        }
-
-        private void StartStream(object sender, OnStreamUpArgs e)
-        {
-            Console.WriteLine("estoy en directo");
-            DataSaved.Instance.isTwitchConnected = true;
-        }
 
         private void OndisConectedClient(object sender, OnDisconnectedEventArgs e)
         {
@@ -141,20 +102,19 @@ namespace StatsLab
             DataSaved.Instance.messageTw = e.ChatMessage.Message.ToString();
             DataSaved.Instance.userMesstw = e.ChatMessage.Username.ToString();
             DataSaved.Instance.userColor = e.ChatMessage.ColorHex.ToString();
-            
+           
             DataSaved.Instance.newMessage = true;
 
-            Console.WriteLine(e.ChatMessage.ColorHex.ToString() + e.ChatMessage.Username.ToString() + " : " + e.ChatMessage.Message.ToString());
 
-          
+   
         }
 
         private void OnConectedClient(object sender, OnConnectedArgs e)
         {
-            
-            _channel = _client.JoinedChannels.FirstOrDefault();
+           
+          //  _channel = _client.JoinedChannels.FirstOrDefault();
             DataSaved.Instance.isClienConnected = true;
-            _client.SendMessage(_channel, "Hola");
+          //  _client.SendMessage(_channel, "Hola");
 
         }
     }
@@ -181,8 +141,7 @@ namespace StatsLab
 
         public Config(string username , string userToken)
         {
-            //string content = File.ReadAllText(filepath);
-           // var c = JsonConvert.DeserializeObject<Config>(content);
+           
             this.name = username;
             this.token = userToken;
 
@@ -199,9 +158,6 @@ namespace StatsLab
 
 
 
-        public static readonly string TwitchClientId = "30y1o0f4aisqenvpgnm3duwa8q77cl";
-        public static readonly string TwitchRedirectUri = "http://localhost:3000/";
-        public static readonly string TwitchClientSecret = "i0x8f56wv6h46iwqxo6w2xvwnkiyev";
     }
 
 
@@ -215,11 +171,15 @@ namespace StatsLab
        
         public bool blockTouch = false;
 
+       
+      
+       
         public StatsViewTw()
         {
+           
+          
 
             InitializeComponent();
-            //_twitchConnection = new TwitchConnection();
             ShowInTaskbar = false;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(0.1f);
@@ -242,31 +202,104 @@ namespace StatsLab
             }
 
 
-        }
+        } 
+        private void rechargedTimer(object sender, EventArgs e)
+        {
+           
+            UpdateStateLock();
+            ShowGrids();
+            ConsultViewers();
+            if (!DataSaved.Instance.Viewerstw)
+            {
+                GridChatTwitch.SetValue(Grid.RowProperty, 1);
+                GridChatTwitch.SetValue(Grid.RowSpanProperty, 5);
+            }
+            else if(DataSaved.Instance.Viewerstw)
+            {
+                GridChatTwitch.SetValue(Grid.RowProperty, 2);
+                GridChatTwitch.SetValue(Grid.RowSpanProperty, 4);
+            }
 
-        public async void ConsultViewers()
-        {  
+
             if (DataSaved.Instance.isClienConnected)
             {
+               
+                MakeNewChat();
+                UpdateStateViewers();
+               
+
+                OBSWebsocket obs = OBSConnector.Instance.obs;
+
+                if (DataSaved.Instance.isConnectedOBS)
+                {
+                    DataSaved.Instance.isStreaming = obs.GetStreamStatus().IsActive;
+                    if (obs.GetStreamStatus().IsActive)
+                    {
+                        InDirect.Visibility = Visibility.Visible;
+                    }
+                    else if (!obs.GetStreamStatus().IsActive)
+                    {
+                        InDirect.Visibility = Visibility.Collapsed;
+                    }
+
+                }
+
+            }
+        }
+       
+        public async void ConsultViewers()
+        {  
+            if ( DataSaved.Instance.isStreaming)
+            {
+                
+
                 var api = new TwitchAPI();
                 api.Settings.ClientId = "30y1o0f4aisqenvpgnm3duwa8q77cl";
-                api.Settings.Secret = "i0x8f56wv6h46iwqxo6w2xvwnkiyev";
+                api.Settings.Secret = "z74luhth5mt9q2186fgebmc5rcqtsi";
+
+
                 try
+
                 {
+                   
+
                     var userLogins = new System.Collections.Generic.List<string> { DataSaved.Instance.channelName };
 
                     var streams = await api.Helix.Streams.GetStreamsAsync(userLogins: userLogins);
 
+                    api.Settings.AccessToken = api.Settings.Secret;
+
+                    try
+                    {
+                        var emotes = await api.Helix.Chat.GetGlobalEmotesAsync();
+
+                        foreach (var emote in emotes.GlobalEmotes)
+                        {
+                            Console.WriteLine($"Emote ID: {emote.Id}, Code: {emote.Name}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine (ex.ToString());
+                    }
+                    
+                    
+
                     if (streams.Streams.Length > 0)
                     {
+                        try
+                        {
+                            DataSaved.Instance.countViewers = streams.Streams[0].ViewerCount.ToString();
+                        }
+                        catch
+                        {
 
-                        DataSaved.Instance.countViewers = streams.Streams[0].ViewerCount.ToString();
-                        //Console.WriteLine(streams.Streams[0].ViewerCount.ToString());
-
+                        }
+                      
                     }
                     else
                     {
-                        // Console.WriteLine("Canal no encontrado o sin transmisión en vivo");
+                      //  Console.WriteLine("Canal no encontrado o sin transmisión en vivo");
                     }
 
                 }
@@ -289,90 +322,70 @@ namespace StatsLab
            
         }
 
+
         public void MakeNewChat( )
         {
+            
 
-            try
-            {
+
+          
                 if (DataSaved.Instance.newMessage)
                 {
-                    TextBlock textBlock = new TextBlock()
+                    
+                    
+                    WrapPanel stackPanel = new WrapPanel()
                     {
                         Margin = new Thickness(2),
-                        TextWrapping= TextWrapping.Wrap,
-                        FontSize = 25,
+                        Orientation = Orientation.Horizontal,
+                        VerticalAlignment = VerticalAlignment.Center,
                         
+                    };
+                    ChatPanel.Children.Add( stackPanel );
+
+                    TextBlock userChat = new TextBlock()
+                    {
+                        Margin = new Thickness(2),
+                        TextWrapping = TextWrapping.Wrap,
+                        FontSize = DataSaved.Instance.letterSize
+
 
                     };
+                    TextBlock messageChat = new TextBlock()
+                    {
+                        Margin = new Thickness(2),
+                        TextWrapping = TextWrapping.Wrap,
+                        FontSize = DataSaved.Instance.letterSize
+
+                    };
+                    userChat.Text = DataSaved.Instance.userMesstw + " : " ;
+                     messageChat.Text = DataSaved.Instance.messageTw ;
 
                     
-                   
+                        messageChat.Foreground = Brushes.White;
+                        try
+                        {
+                            userChat.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(DataSaved.Instance.userColor));
+                        }
+                        catch (Exception exception )
+                        {
+                            
+                            userChat.Foreground = Brushes.Red; 
+                        }
 
-                    textBlock.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(DataSaved.Instance.userColor));
-                    textBlock.Text = DataSaved.Instance.userMesstw + " : " + DataSaved.Instance.messageTw;
-                  
-
-                    ChatPanel.Children.Add(textBlock);
+                stackPanel.Children.Add(userChat);
+                   stackPanel.Children.Add(messageChat);
                     ScrolChat.ScrollToEnd();
                     DataSaved.Instance.newMessage = false;
                 }
 
-            }
-            catch (Exception e)
-            {
-
-
-            }
+            
+         
            
 
         }
 
 
-        private void rechargedTimer(object sender, EventArgs e)
-        {
-            ConsultViewers();
-            UpdateStateLock();
-            ShowGrids();
-
-
-
-            if (DataSaved.Instance.isClienConnected)
-            {
-
-                MakeNewChat();
-                UpdateStateViewers();
-
-
-                OBSWebsocket obs = OBSConnector.Instance.obs;
-
-                //Obtén el estado de la transmisión
-                if (DataSaved.Instance.isConnectedOBS)
-                {
-                    bool isStreaming = obs.GetStreamStatus().IsActive;
-                    if (isStreaming)
-                    {
-                        // OBS está transmitiendo
-                        InDirect.Visibility = Visibility.Visible;
-                    }
-                    else if (obs.GetStreamStatus().IsActive)
-                    {
-                        //  OBS está reconectándose
-                        InDirect.Visibility = Visibility.Visible;
-                    }
-                    else if (DataSaved.Instance.isConnectedOBS)
-                    {
-                        //   OBS no está transmitiendo ni reconectándose
-                        InDirect.Visibility = Visibility.Collapsed;
-                    }
-
-
-                    // Verifica si OBS está actualmente transmitiendo
-
-
-                }
-
-            }
-        }
+       
 
         private void ShowGrids()
         {
@@ -396,39 +409,22 @@ namespace StatsLab
         }
 
         public void UpdateStateViewers() {
-            
-            ConsultViewers();
+       
             NumViewers.Content = DataSaved.Instance.countViewers;
 
         }
 
-        private void TuVentana_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.F11  )
-            {
-                Close.Visibility = Visibility.Collapsed;
-                CandadoA.Visibility = Visibility.Collapsed;
-                CandadoA.Visibility= Visibility.Collapsed;
-            }
-            else if(e.Key == Key.F11 )
-            {
-               
-                Close.Visibility = Visibility.Visible;
-                UpdateStateLock();
-                
-            }
-
-        }
+       
 
         private void ClosedButton(object sender, RoutedEventArgs e)
         {
-            if (!blockTouch)
+            if (!DataSaved.Instance.blockTouchtwitch)
             {
-                double posX = MyWindowTwitch.Left;
-                double posY = MyWindowTwitch.Top;
-                double winHeigh = MyWindowTwitch.Height;
-                double winWidth = MyWindowTwitch.Width;
-                DataSaved.Instance.SaveDocTwitch(posX, posY, winHeigh, winWidth);
+                DataSaved.Instance.posXObs = MyWindowTwitch.Left;
+                DataSaved.Instance.posYObs = MyWindowTwitch.Top;
+                DataSaved.Instance.heightTwitch = MyWindowTwitch.Height;
+                DataSaved.Instance.widthTwitch= MyWindowTwitch.Width;
+                DataSaved.Instance.SaveDocTwitch(DataSaved.Instance.posXObs, DataSaved.Instance.posYObs, DataSaved.Instance.heightTwitch, DataSaved.Instance.widthTwitch);
                 Console.WriteLine("SeGuardo");
                 this.Hide();
             }
@@ -436,15 +432,18 @@ namespace StatsLab
 
         }
 
+      
+
         private void BlockButton(object sender, RoutedEventArgs e)
         {
-            if (blockTouch)
+            if (DataSaved.Instance.blockTouchtwitch)
             {
-                blockTouch = false;
+                DataSaved.Instance.blockTouchtwitch = false;
                
             }
             else
-            { blockTouch = true;
+            {
+                DataSaved.Instance.blockTouchtwitch = true;
 
                
             }
@@ -452,7 +451,7 @@ namespace StatsLab
 
         private void DragWindow(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && !blockTouch)
+            if (e.LeftButton == MouseButtonState.Pressed && !DataSaved.Instance.blockTouchtwitch)
             {
                 this.DragMove();
             }
@@ -464,20 +463,20 @@ namespace StatsLab
                 CandadoC.Visibility = Visibility.Collapsed;
                 CandadoA.Visibility = Visibility.Collapsed;
                 ButtonBlock.Visibility = Visibility.Collapsed;
-            }else if(!DataSaved.Instance.isBlockTwitch && blockTouch == false)
+            }else if(!DataSaved.Instance.isBlockTwitch && DataSaved.Instance.blockTouchtwitch == false)
             {
                 CandadoA.Visibility = Visibility.Visible;
                 CandadoC.Visibility = Visibility.Collapsed;
                 ButtonBlock.Visibility = Visibility.Visible;
             }
-            else if(!DataSaved.Instance.isBlockTwitch && blockTouch)
+            else if(!DataSaved.Instance.isBlockTwitch && DataSaved.Instance.blockTouchtwitch)
             {
                 CandadoA.Visibility = Visibility.Collapsed;
                 CandadoC.Visibility = Visibility.Visible; 
                 ButtonBlock.Visibility = Visibility.Visible;
 
             }
-            if (blockTouch == false)
+            if (DataSaved.Instance.blockTouchtwitch == false)
             {
                 
                 Close.Visibility = Visibility.Visible;
@@ -486,7 +485,7 @@ namespace StatsLab
                 MyWindowTwitch.BorderBrush = Brushes.Black;
               
             }
-            else if (blockTouch == true)
+            else if (DataSaved.Instance.blockTouchtwitch == true)
             {
               
                 Close.Visibility = Visibility.Collapsed;

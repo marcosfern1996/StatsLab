@@ -16,16 +16,14 @@
         WindowStyle="none"
         Title="Window1" Height="400" Width="300" 
         MouseDown="DragWindow"
-        PreviewKeyDown="TuVentana_KeyDown"
         x:Name="MyWindowTwitch"
         >
     <Grid >
 
 
-
+       
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width= "50" ></ColumnDefinition>
                 <ColumnDefinition Width= "50" ></ColumnDefinition>
                 <ColumnDefinition Width= "50" ></ColumnDefinition>
                 <ColumnDefinition Width= "*" ></ColumnDefinition>
@@ -37,8 +35,7 @@
             </Grid.RowDefinitions>
 
 
-            <Button Name = "Close" Grid.Column="3" Content="X" FontSize="8" Click="ClosedButton" Width="15" Height="15" HorizontalAlignment="Right"/>
-
+            
             <Grid Name="GridViewers"
                 Grid.ColumnSpan="2"
                 Grid.RowSpan="2">
@@ -50,25 +47,14 @@
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition Height="50"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Source="/Personas1.png"  Grid.Column="0" OpacityMask="#7FFFFFFF" Grid.Row="1" Grid.ColumnSpan="2" Margin="-1,0,0,1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
-                <Label Name="NumViewers" Content="20" Grid.Row="1" Grid.Column="1" Background="#00522FF3" Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" />
+                <Image Source="/Images/Personas1.png"  Grid.Column="0" OpacityMask="#7FFFFFFF" Grid.Row="1" Grid.ColumnSpan="2" Margin="-1,0,0,1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+                <Label Name="NumViewers" Content="" Grid.Row="1" Grid.Column="1" Background="#00522FF3" Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" />
 
 
             </Grid>
             
             
-            <Image Margin="5" Name="CandadoA" Source="/Candado_A.png"  Grid.Column="2" Grid.Row="1"/>
-            <Image Margin="5" Name="CandadoC" Source="/candado_C.png" Grid.Column="2" Grid.Row="1"/>
-            <Button Grid.Column="2" 
-                     Grid.Row="1"
-                        Margin="2"
-                     Name ="ButtonBlock"
-                     Background="Transparent"     
-                     BorderBrush="Transparent"
-                     Click="BlockButton"
-                     Cursor="Hand" Opacity="0.05"
-                     />
-
+           
             
             <Ellipse Name="InDirect" 
                     Width="15" 
@@ -80,17 +66,42 @@
              />
             <Grid Name="GridChatTwitch" Grid.Column="0" 
                   Grid.Row="2" 
-                  Grid.ColumnSpan="4" Margin="20"
-                  
+                  Grid.ColumnSpan="3" Margin="20"
+               
                   >
-                <ScrollViewer Name="ScrolChat" VerticalScrollBarVisibility="Visible" PanningMode="VerticalOnly">
+                
+                <ScrollViewer Name="ScrolChat" VerticalScrollBarVisibility="Hidden" PanningMode="VerticalOnly">
                     <WrapPanel Name="ChatPanel" Orientation="Vertical" Background="Transparent" 
                                >
-                   
-
-                </WrapPanel>
+                    </WrapPanel>
                 </ScrollViewer>
             </Grid>
         </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Name = "Close" Grid.Column="3" Content="X" FontSize="8" Click="ClosedButton" Width="15" Height="15" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+
+            <Image  Name="CandadoA" Source="/Images/Candado_A.png"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Top"/>
+            <Image Name="CandadoC" Source="/Images/candado_C.png" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top"/>
+            <Button Grid.Column="1" 
+               
+               Name ="ButtonBlock"
+               Background="Transparent"     
+               BorderBrush="Transparent"
+               Click="BlockButton"
+             VerticalAlignment="Top"  
+             Cursor="Hand" Opacity="0.05"
+             Height="25"
+   />
+
+
+
+        </Grid>
+
     </Grid>
 </Window>
